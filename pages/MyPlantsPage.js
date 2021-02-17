@@ -55,6 +55,7 @@ const windowHeight = Dimensions.get('window').height;
                                         resizeMode="contain"
                                         />
                                         <Title style = {styles.text}>{item.title}</Title>
+                                        <Paragraph style = {styles.text}>Plant watered: {item.water}</Paragraph>
                             </Card.Content>
                             <TouchableOpacity style = {styles.icon} onPress = {() => {
                                 remove(item.id);

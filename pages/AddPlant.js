@@ -54,7 +54,7 @@ const AddPlants = ({navigation}) =>{
                 title = 'Sumbit'
                 style={styles.Btn}
                 onPress = {() => {
-                     if(water == "" && water < 5){
+                     if(water == "" || water > 5){
                                 alert("Water Count cannot be greater than 5 or empty")
                             }
                             else{
