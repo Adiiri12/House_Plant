@@ -19,9 +19,9 @@ function PlantPages(){
     <Stack.Navigator 
     screenOptions = {{
         headerStyle:{
-            backgroundColor : '#00008b',
+            backgroundColor : '#FFFFFF',
         },
-        headerTintColor : '#fff',
+        headerTintColor : 'black',
         headerTitleStyle : {
             fontWeight : 'bold',
         },
@@ -46,9 +46,9 @@ function HomeTab(){
     <Stack.Navigator 
     screenOptions = {{
         headerStyle:{
-            backgroundColor : '#00008b',
+            backgroundColor : '#FFFFFF',
         },
-        headerTintColor : '#fff',
+        headerTintColor : 'black',
         headerTitleStyle : {
             fontWeight : 'bold',
         },
@@ -67,9 +67,9 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator
         tabBarOptions={{
-          style : {backgroundColor : '#00008b'},
-          activeTintColor: '#FFF700',
-          inactiveTintColor: 'white',    
+          style : {backgroundColor : '#FFFFFF'},
+          activeTintColor: 'blue',
+          inactiveTintColor: 'black',    
         }}>
         <Tab.Screen
           name="Home"
@@ -79,7 +79,7 @@ const App = () => {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="Home"
-                color= 'white'
+                color= 'green'
                 size={size}
               />
             ),
@@ -92,7 +92,7 @@ const App = () => {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="leaf"
-                color= 'white'
+                color= 'green'
                 size={size}
               />
             ),
