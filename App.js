@@ -8,6 +8,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AddPlants from './pages/AddPlant';
 import Plants from './pages/MyPlantsPage';
 import Home from './pages/HomePage';
+import {PlantProvider} from './context/PlantContext'
+import Camera from './pages/CameraPage';
 
 
 
@@ -28,7 +30,7 @@ function PlantPages(){
     }}
     >
     <Stack.Screen
-      name = 'Home'
+      name = 'Plants'
       component = {Plants}
       options = {{title: "My Plants"}}
     />
@@ -36,6 +38,11 @@ function PlantPages(){
    name = 'Add'
    component = {AddPlants}
     options = {{title: "Add"}}
+    />
+     <Stack.Screen
+    name = 'Camera'
+    component = {Camera}
+    options = {{title: "Camera"}}
     />
     </Stack.Navigator>
   );
@@ -64,6 +71,7 @@ function HomeTab(){
 }
 const App = () => {
   return (
+    <PlantProvider>
     <NavigationContainer>
       <Tab.Navigator
         tabBarOptions={{
@@ -99,6 +107,7 @@ const App = () => {
           }}/>
       </Tab.Navigator>
     </NavigationContainer>
+    </PlantProvider>
   );
 }
 

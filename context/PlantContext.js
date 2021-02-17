@@ -1,11 +1,11 @@
 import React, {useReducer,useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const STORAGE_KEY = "plant_storage";
+const STORAGE_KEY = "Plant_Storage_v2";
 
 const PlantContext = React.createContext();
 
-const plant = (state,action) =>{
+const Plant = (state,action) =>{
     switch(action.type){
         case 'addPlant':
             return [
@@ -18,48 +18,47 @@ const plant = (state,action) =>{
                   water: action.payload.water
                 }
              ];
-             case 'Update':
-                return state.map((e)=>{
-                if(e.id === action.payload.id)
-                {
-                  return action.payload;
-                }
-                else{
-                   return e;
-                }
-             });
-             case 'Delete':
-                return state.filter((e) => e.id !== action.payload.id);
-             case 'SaveData':
-                try{
-                   AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-                }catch(e){
-                   console.log(e);
-                }finally{
+        case 'Update':
+          return state.map((e)=>{
+            if(e.id === action.payload.id)
+            {
+                return action.payload;
+            }
+            else{
+                 return e;
+            }
+         });
+      case 'Delete':
+            return state.filter((e) => e.id !== action.payload.id);
+      case 'SaveData':
+            try{
+               AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }catch(e){
+                  console.log(e);
+            }finally{
                    return state;
-                }
-                case 'LoadData':
-                    return [
-                       ...state,
-                       {
-                         id :action.payload.id,
-                         title : action.payload.title,
-                         content : action.payload.content,
-                         image : action.payload.image,
-                         water : action.payload.water
-                       }
-                    ];
-              default:
-          return state;
+                   }
+    case 'LoadData':
+             return [
+               ...state,
+               {
+                id :action.payload.id,
+                title : action.payload.title,
+                content : action.payload.content,
+                image : action.payload.image,
+                water : action.payload.water
+              }
+            ];
+      default:
+        return state;
     };
 }
 
 const Myplants = [
-
-]
+];
 
 export const PlantProvider = ({children}) =>{
-    const [state,dispatch] = useReducer(plant,Myplants);
+    const [state,dispatch] = useReducer(Plant,Myplants);
     useEffect(() => {
        const loadStorage = async() =>{
           const storage = await AsyncStorage.getItem(STORAGE_KEY);
@@ -74,7 +73,7 @@ export const PlantProvider = ({children}) =>{
     }, [STORAGE_KEY]);  // Persistant Storage until we move it to external storage 
 
     const addPlant = (title,content,uri,water,callback) =>{
-        dispatch ({type : 'AddEntry', payload : {title,content,image:uri,water}});
+        dispatch ({type : 'addPlant', payload : {title,content,image:uri,water}});
         dispatch({type : 'SaveData' });
         if(callback){
            callback();
