@@ -15,7 +15,7 @@ const Plant = (state, action) => {
                     title: action.payload.title,
                     content: action.payload.content,
                     image: action.payload.image,
-                    water: action.payload.water,
+                    date : new Date()
                 },
             ];
         case 'Update':
@@ -44,7 +44,7 @@ const Plant = (state, action) => {
                     title: action.payload.title,
                     content: action.payload.content,
                     image: action.payload.image,
-                    water: action.payload.water,
+                    date : new Date(action.payload.date)
                 },
             ];
         default:
@@ -69,16 +69,16 @@ export const PlantProvider = ({ children }) => {
         loadStorage();
     }, [STORAGE_KEY]); // Persistant Storage until we move it to external storage
 
-    const addPlant = (title, content, uri, water, callback) => {
-        dispatch({ type: 'addPlant', payload: { title, content, image: uri, water } });
+    const addPlant = (title, content, uri, callback) => {
+        dispatch({ type: 'addPlant', payload: { title, content, image: uri,} });
         dispatch({ type: 'SaveData' });
         if (callback) {
             callback();
         }
     };
 
-    const updatePlant = (title, content, uri, water, callback) => {
-        dispatch({ type: 'Update', payload: { title, content, image: uri, water } });
+    const updatePlant = (id,title, content, uri,date,callback) => {
+        dispatch({ type: 'Update', payload: {id,title, content, image: uri,date} });
         dispatch({ type: 'SaveData' });
         if (callback) {
             callback();
@@ -93,8 +93,9 @@ export const PlantProvider = ({ children }) => {
         }
     };
 
-    const WaterCont = (water,callback)=> {
-        dispatch({ type: 'Update', payload: { water } });
+
+    const DateUpdate = (date,callback) =>{
+        dispatch({ type: 'Update', payload: { date } });
         dispatch({ type: 'SaveData' });
         if (callback) {
             callback();
@@ -105,8 +106,9 @@ export const PlantProvider = ({ children }) => {
             value={{
                 state: state,
                 create: addPlant,
-                update: updatePlant,
+                Updating: updatePlant,
                 remove: deletePlant,
+                water : DateUpdate
             }}
         >
             {children}

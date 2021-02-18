@@ -15,12 +15,13 @@ import { NavigationScreens } from '../../common/navigation';
 
 const EditPlantPage = ({ navigation,route}) => {
 	const {id} = route.params;
-	const { state, update } = useContext(PlantContext);
+	const dateS = new Date()
+	const { state, Updating } = useContext(PlantContext);
 	const currentId = state.find((e) => e.id === id);
 	const[title , setTitle] = useState(currentId.title);
     const[content, setContent] = useState(currentId.content);
     const[image, setImage] = useState(currentId.image);
-    const [water, setWater] = useState(currentId.water);
+    const [date, setDate] = useState(dateS);
 
     return (
 		<Page>
@@ -65,28 +66,22 @@ const EditPlantPage = ({ navigation,route}) => {
 						returnKeyType={'done'}
 						onChangeText={(val) => setImage(val)}
 					/>
-					<Text style={styles.text}>Plant watered out of 5</Text>
+					<Text style={styles.text}>Date Watered</Text>
 					<TextInput
 						style={styles.input}
-						value = {water}
-						keyboardType='number-pad'
-						returnKeyType={'done'}
-						onChangeText={(val) => setWater(val.toString())}
-						maxLength={1}
+						value = {dateS.toDateString()}
 					/>
 					<View style={styles.buttonPos}>
 						<Button
 							title='Sumbit'
 							style={styles.Btn}
 							onPress={() => {
-								if (water == '' && water < 5) {
-									alert('Water Count cannot be greater than 5 or empty');
-								} else {
-									update(title, content, image, water, () => {
-										navigation.navigate(NavigationScreens.Plants.name);
-									});
-								}
-							}}
+								console.log("update")
+								Updating(currentId.id,title, content, image,date,() => {
+									navigation.navigate(NavigationScreens.Plants.name);
+								});
+							
+						}}
 						/>
 					</View>
 				</View>

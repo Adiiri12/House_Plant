@@ -1,18 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, Text, View,Dimensions,ImageBackground,TouchableOpacity,TouchableWithoutFeedback,Animated} from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Avatar, Card, Title, Paragraph } from 'react-native-paper';
 import { FlatList } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlantContext from '../../contexts/PlantContext';
 import { NavigationScreens } from '../../common/navigation';
 import WaterIcon from "./PlantsComponent/WaterIcon"
+import { Button } from 'react-native-elements';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
  const MyPlantsPage = ({navigation}) => {
   const {state, remove} = useContext(PlantContext);
+  const { water} = useContext(PlantContext);
 
  	 useEffect(() => {
 		navigation.setOptions({
@@ -30,7 +32,7 @@ const windowHeight = Dimensions.get('window').height;
     
     // this for eventually creating a review like system for watering
  
-
+  const dateS = new Date()
 
 
    return (
@@ -43,6 +45,8 @@ const windowHeight = Dimensions.get('window').height;
 					return element.id.toString();
 				}}
                   renderItem = {({item}) => {
+                      console.log(item.date.toDateString())
+                      console.log(dateS.toDateString())
 					return (
 						<View style = {styles.card}>
 							<Card  style = {styles.card}> 
@@ -53,21 +57,36 @@ const windowHeight = Dimensions.get('window').height;
 										resizeMode="contain"
 									/>
 									<Title style = {styles.text}>{item.title}</Title>
-                                    <Paragraph style = {{flexDirection : "row"}}></Paragraph>
+                                     <Paragraph style = {{fontSize : 13 ,padding : 5}}>{item.content}</Paragraph>
 								</Card.Content>
                                 <View style = {styles.icon} >
-                                     <TouchableOpacity style = {styles.icon} onPress={() => {
+                                     <TouchableOpacity  onPress={() => {
 									    remove(item.id);
 								        }}>
-                                        <MaterialCommunityIcons name="delete" size={24} color="red"/>
+                                        <MaterialCommunityIcons name="delete" size={26} color="red"/>
 								    </TouchableOpacity>
-                                    <TouchableOpacity style = {styles.icon} onPress={() => {
+                                    <TouchableOpacity  onPress={() => {
 									    navigation.navigate("editplant",{
                                         id : item.id
                                         });
 								    }}>
-                                        <MaterialCommunityIcons  name="tooltip-edit-outline" size={24} color="blue"/>
+                                       
+                                        <MaterialCommunityIcons  name="tooltip-edit-outline" size={26} color="blue"/>
 								    </TouchableOpacity>
+                                    <Button
+							            title='Plant Watered ?'
+                                        titleStyle={{
+                                            fontSize : 10
+                                        }}
+                                        style = {styles.buttonPos}
+							            onPress={() => {
+							            	if (item.date.toDateString() == dateS.toDateString()) {
+									        alert('Plant Already Watered');
+								            } else {
+									        water(dateS)
+								        }
+							        }}
+                                    />
                                 </View>
 							</Card>
 						</View>
@@ -102,21 +121,25 @@ const styles = StyleSheet.create(
             //backgroundColor : 'white'
        },
        cardImage :{
-          height : windowHeight/2.95,
-          //width :windowWidth/1.01,
+          height : windowHeight/4,
+          //width :windowWidth/6,
           backgroundColor : '#000'
        },
        text : {
          fontWeight : 'bold',
-         fontSize : 10,
+         fontSize : 25,
        },
        icon :{
         //position: 'absolute',
         ///bottom:0,
         //right : 0,
         flexDirection : "row",
-        alignItems : 'flex-end'
+        //alignSelf : "flex-start"
+        justifyContent: 'space-evenly',
        },
+       buttonPos: {
+        alignSelf: "flex-end",
+    },
     }
 );
 
