@@ -44,8 +44,8 @@ const windowHeight = Dimensions.get('window').height;
 				}}
                   renderItem = {({item}) => {
 					return (
-						<View>
-							<Card style = {styles.card}>
+						<View style = {styles.card}>
+							<Card  style = {styles.card}> 
 								<Card.Content>
 									<ImageBackground
 										source ={{uri: item.image}}
@@ -82,29 +82,24 @@ const styles = StyleSheet.create(
     {
         container:{
             //flexDirection : "row",
-            alignItems : 'flex-start',
-            alignContent : 'center',
-            justifyContent :'center',
+         
             flex : 1,
-            flexWrap : "wrap"
+            //backgroundColor : "blue"
         },
          cards :{
              flex : 1,
              //backgroundColor : 'yellow',
              //justifyContent :'center',
              //flexDirection : 'row-reverse',
-             alignItems : 'center',
-             justifyContent :'center',
          },
          card : {
-            borderWidth : 1,
-            borderRadius : 1,
-            borderColor : '#000',
-            width : windowWidth,
-            height : windowHeight/2,
+            //borderWidth : 1,
+            //borderRadius : 1,
+         //borderColor : '#000',
+            flex : 3,
             padding :1,
             margin : 3,
-            backgroundColor : 'white'
+            //backgroundColor : 'white'
        },
        cardImage :{
           height : windowHeight/2.95,
