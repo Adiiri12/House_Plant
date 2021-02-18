@@ -29,29 +29,16 @@ const windowHeight = Dimensions.get('window').height;
     //let waters = []
     
     // this for eventually creating a review like system for watering
+ 
 
-    /*
-    useEffect(()=>{
-        const numWater = 5
-        for(let x =1; x<=numWater; x++){
-            waters.push(
-             <TouchableWithoutFeedback key={x}>
-                 <Animated.View>
-                  <WaterIcon filled ={x = state.water ? true : false}/>
-                 </Animated.View>
-             </TouchableWithoutFeedback>
-          )
-         }
-     }
-    );
 
-    */
 
    return (
    
       <View style = {styles.container}>
             <FlatList
-				data = {state}
+                data = {state}
+                numColumns = {2}
 				keyExtractor = {(element) =>{ 
 					return element.id.toString();
 				}}
@@ -66,6 +53,7 @@ const windowHeight = Dimensions.get('window').height;
 										resizeMode="contain"
 									/>
 									<Title style = {styles.text}>{item.title}</Title>
+                                    <Paragraph style = {{flexDirection : "row"}}></Paragraph>
 								</Card.Content>
                                 <View style = {styles.icon} >
                                      <TouchableOpacity style = {styles.icon} onPress={() => {
