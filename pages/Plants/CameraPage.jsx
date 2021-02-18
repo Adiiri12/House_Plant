@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, } from 'react-native';
+import Page from '../Page';
 
 
 
-
- const Home = ({navigation}) => {
+ const CameraPage = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
+    <Page>
+      <Text>Camera</Text>
       <StatusBar style="auto" />
-    </View>
+	</Page>
   );
 }
 
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default CameraPage;
