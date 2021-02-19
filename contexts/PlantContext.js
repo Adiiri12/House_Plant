@@ -15,7 +15,7 @@ const PlantReducer = (state, action) => {
                     title: action.payload.title,
                     content: action.payload.content,
                     image: action.payload.image,
-                    date: new Date(),
+                    date: action.payload.date,
                 },
             ];
         case 'Update':
@@ -70,8 +70,8 @@ export const PlantProvider = ({ children }) => {
         loadStorage();
     }, [STORAGE_KEY]); // Persistant Storage until we move it to external storage
 
-    const addPlant = (title, content, uri, callback) => {
-        setPlants({ type: 'addPlant', payload: { title, content, image: uri } });
+    const addPlant = (title, content, uri,date, callback) => {
+        setPlants({ type: 'Add', payload: { title, content, image: uri,date } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
@@ -94,8 +94,8 @@ export const PlantProvider = ({ children }) => {
         }
     };
 
-    const DateUpdate = (date, callback) => {
-        setPlants({ type: 'Update', payload: { date } });
+    const DateUpdate = (id,date, callback) => {
+        setPlants({ type: 'Update', payload: { id,date } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();

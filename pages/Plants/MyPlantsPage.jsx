@@ -26,7 +26,7 @@ const MyPlantsPage = ({ navigation }) => {
     const theme = useTheme();
 
     const { state, remove } = useContext(PlantContext);
-    const { water } = useContext(PlantContext);
+    const { Updating } = useContext(PlantContext);
 
     useEffect(() => {
         navigation.setOptions({
@@ -59,8 +59,10 @@ const MyPlantsPage = ({ navigation }) => {
                     return element.id.toString();
                 }}
                 renderItem={({ item }) => {
-                    console.log(item.date.toDateString());
-                    console.log(dateS.toDateString());
+                    console.log("save data is"+item.date.toDateString());
+                    console.log( "the date is"+dateS.toDateString());
+                    console.log(item)
+                    var half = item.content.substring(0,80);
                     return (
                         <View style={styles.card}>
                             <Card style={styles.card}>
@@ -71,8 +73,8 @@ const MyPlantsPage = ({ navigation }) => {
                                         resizeMode='contain'
                                     />
                                     <Title style={styles.text}>{item.title}</Title>
-                                    <Paragraph style={{ fontSize: 13, padding: 5 }}>
-                                        {item.content}
+                                    <Paragraph style={{ fontSize: 13, padding: 5,marginLeft : -5 }}>
+                                        {half}<Text style = {{color : 'blue'}}> Read more</Text>
                                     </Paragraph>
                                 </Card.Content>
                                 <View style={styles.icon}>
@@ -110,7 +112,7 @@ const MyPlantsPage = ({ navigation }) => {
                                             if (item.date.toDateString() == dateS.toDateString()) {
                                                 alert('Plant Already Watered');
                                             } else {
-                                                water(dateS);
+                                                Updating(item.id,item.title,item.content,item.image,dateS);
                                             }
                                         }}
                                     />
@@ -154,14 +156,16 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: 20,
     },
     icon: {
         //position: 'absolute',
         ///bottom:0,
         //right : 0,
+        flex : 1,
         flexDirection: 'row',
-        //alignSelf : "flex-start"
+        //flexGrow : 1,
+        //justifyContent: 'flex-end'
         justifyContent: 'space-evenly',
     },
     buttonPos: {

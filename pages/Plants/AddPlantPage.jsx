@@ -6,6 +6,7 @@ import {
     TextInput,
     Keyboard,
     TouchableWithoutFeedback,
+    DatePickerIOSBase,
 } from 'react-native';
 import PlantContext from '../../contexts/PlantContext';
 import { Button } from 'react-native-elements';
@@ -17,12 +18,12 @@ const AddPlantPage = ({ navigation }) => {
     const { create } = useContext(PlantContext);
     const dateS = new Date();
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState('No Derscripition Avabile update page');
     const [image, setImage] = useState(
         'https://image.shutterstock.com/image-vector/no-image-available-icon-vector-260nw-1323742826.jpg'
     );
     const [date, setDate] = useState(dateS);
-
+    console.log(dateS)
     return (
         <Page>
             <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -75,7 +76,7 @@ const AddPlantPage = ({ navigation }) => {
                             title='Sumbit'
                             style={styles.Btn}
                             onPress={() => {
-                                create(title, content, image, () => {
+                                create(title, content, image,dateS, () => {
                                     navigation.navigate(NavigationScreens.Plants.name);
                                 });
                             }}
