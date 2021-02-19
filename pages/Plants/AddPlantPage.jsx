@@ -14,8 +14,8 @@ import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
 
 const AddPlantPage = ({ navigation }) => {
-	const { create } = useContext(PlantContext);
-	const dateS = new Date()
+    const { create } = useContext(PlantContext);
+    const dateS = new Date();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState(
@@ -24,67 +24,66 @@ const AddPlantPage = ({ navigation }) => {
     const [date, setDate] = useState(dateS);
 
     return (
-		<Page>
-			<KeyboardAwareScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-				<View style={styles.container}>
-					<Text style={styles.text}>Add</Text>
-					<TextInput
-						style={styles.input}
-						placeholder='Title'
-						returnKeyType={'done'}
-						onChangeText={(val) => setTitle(val)}
-					/>
-					<Text style={styles.text}>Content</Text>
-					<TextInput
-						style={styles.inputMulti}
-						placeholder='Content'
-						onChangeText={(val) => setContent(val)}
-						multiline={true}
-						maxLength={140}
-						//numberOfLines = {2}
-						keyboardType='default'
-						returnKeyType={'done'}
-						blurOnSubmit={true}
-						onSubmitEditing={() => {
-							Keyboard.dismiss();
-						}}
-						ellipsizeMode={'tail'}
-					/>
-					<Button
-						title='Add Picture'
-						style={styles.Btn}
-						onPress={() => {
-							navigation.navigate(NavigationScreens.Camera.name);
-						}}
-					/>
-					<TextInput
-						style={styles.input}
-						placeholder='image url'
-						returnKeyType={'done'}
-						onChangeText={(val) => setImage(val)}
-					/>
-					<Text style={styles.text}>Date Added</Text>
-					<TextInput
-						style={styles.input}
-						value = {dateS.toDateString()}
-						editable={false}
-						selectTextOnFocus={false}
-					/>
-					<View style={styles.buttonPos}>
-						<Button
-							title='Sumbit'
-							style={styles.Btn}
-							onPress={() => {
-									create(title, content, image,() => {
-										navigation.navigate(NavigationScreens.Plants.name);
-									});
-								
-							}}
-						/>
-					</View>
-				</View>
-			</KeyboardAwareScrollView>
-		</Page>
+        <Page>
+            <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+                <View style={styles.container}>
+                    <Text style={styles.text}>Add</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Title'
+                        returnKeyType={'done'}
+                        onChangeText={(val) => setTitle(val)}
+                    />
+                    <Text style={styles.text}>Content</Text>
+                    <TextInput
+                        style={styles.inputMulti}
+                        placeholder='Content'
+                        onChangeText={(val) => setContent(val)}
+                        multiline={true}
+                        maxLength={140}
+                        //numberOfLines = {2}
+                        keyboardType='default'
+                        returnKeyType={'done'}
+                        blurOnSubmit={true}
+                        onSubmitEditing={() => {
+                            Keyboard.dismiss();
+                        }}
+                        ellipsizeMode={'tail'}
+                    />
+                    <Button
+                        title='Add Picture'
+                        style={styles.Btn}
+                        onPress={() => {
+                            navigation.navigate(NavigationScreens.Camera.name);
+                        }}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='image url'
+                        returnKeyType={'done'}
+                        onChangeText={(val) => setImage(val)}
+                    />
+                    <Text style={styles.text}>Date Added</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={dateS.toDateString()}
+                        editable={false}
+                        selectTextOnFocus={false}
+                    />
+                    <View style={styles.buttonPos}>
+                        <Button
+                            title='Sumbit'
+                            style={styles.Btn}
+                            onPress={() => {
+                                create(title, content, image, () => {
+                                    navigation.navigate(NavigationScreens.Plants.name);
+                                });
+                            }}
+                        />
+                    </View>
+                </View>
+            </KeyboardAwareScrollView>
+        </Page>
     );
 };
 
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         //lexDirection : 'column',
+        borderRadius: 5,
     },
     itemContainer: {
         //flex : 1,

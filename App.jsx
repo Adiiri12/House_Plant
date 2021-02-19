@@ -10,7 +10,7 @@ const theme = {
     colors: {
         ...DefaultTheme.colors,
         primary: '#000',
-        secondary: 'lightgreen',
+        secondary: '#62BD69',
         background: '#eee',
     },
 };
@@ -19,7 +19,7 @@ const App = () => {
     return (
         <AuthProvider>
             <PlantProvider>
-                <Navigation theme={theme}/>
+                <Navigation theme={theme} />
             </PlantProvider>
         </AuthProvider>
     );

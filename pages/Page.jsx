@@ -23,6 +23,7 @@ const useStyles = (theme) =>
             flex: 1,
             padding: 5,
             backgroundColor: theme.colors.background,
+            borderRadius: 5,
         },
         view: {
             flex: 1,

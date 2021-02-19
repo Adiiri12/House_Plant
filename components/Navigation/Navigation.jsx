@@ -8,6 +8,7 @@ import HomeNavigationStackComponent from './HomeNavigationStack';
 import PlantsNavigationStackComponent from './PlantsNavigationStack';
 import ProfileNavigationStackComponent from './ProfileNavigationStack';
 import { NavigationTabs } from '../../common/navigation';
+import { useTheme } from 'react-navigation';
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const Navigation = ({ theme }) => {
                                     name={iconName}
                                     ios={`ios-${iconName}`}
                                     size={size}
-                                    color={color}
+                                    color={focused ? theme.colors.secondary : color}
                                 />
                             );
                         },
@@ -61,6 +62,6 @@ const Navigation = ({ theme }) => {
             )}
         </NavigationContainer>
     );
-}
+};
 
 export default Navigation;

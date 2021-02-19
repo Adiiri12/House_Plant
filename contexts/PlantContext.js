@@ -5,9 +5,9 @@ const STORAGE_KEY = 'Plant_Storage_v2';
 
 const PlantContext = React.createContext();
 
-const Plant = (state, action) => {
+const PlantReducer = (state, action) => {
     switch (action.type) {
-        case 'addPlant':
+        case 'Add':
             return [
                 ...state,
                 {
@@ -15,7 +15,7 @@ const Plant = (state, action) => {
                     title: action.payload.title,
                     content: action.payload.content,
                     image: action.payload.image,
-                    date : new Date()
+                    date: new Date(),
                 },
             ];
         case 'Update':
@@ -44,7 +44,7 @@ const Plant = (state, action) => {
                     title: action.payload.title,
                     content: action.payload.content,
                     image: action.payload.image,
-                    date : new Date(action.payload.date)
+                    date: new Date(action.payload.date),
                 },
             ];
         default:
@@ -55,48 +55,48 @@ const Plant = (state, action) => {
 const Myplants = [];
 
 export const PlantProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(Plant, Myplants);
+    const [plants, setPlants] = useReducer(PlantReducer, Myplants);
     useEffect(() => {
         const loadStorage = async () => {
             const storage = await AsyncStorage.getItem(STORAGE_KEY);
-            if (storage !== null && state.length === 0) {
+            if (storage !== null && plants.length === 0) {
                 let initialState = JSON.parse(storage);
                 initialState.forEach((element) => {
-                    dispatch({ type: 'LoadData', payload: element });
+                    setPlants({ type: 'LoadData', payload: element });
                 });
             }
         };
+
         loadStorage();
     }, [STORAGE_KEY]); // Persistant Storage until we move it to external storage
 
     const addPlant = (title, content, uri, callback) => {
-        dispatch({ type: 'addPlant', payload: { title, content, image: uri,} });
-        dispatch({ type: 'SaveData' });
+        setPlants({ type: 'addPlant', payload: { title, content, image: uri } });
+        setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
         }
     };
 
-    const updatePlant = (id,title, content, uri,date,callback) => {
-        dispatch({ type: 'Update', payload: {id,title, content, image: uri,date} });
-        dispatch({ type: 'SaveData' });
+    const updatePlant = (id, title, content, uri, date, callback) => {
+        setPlants({ type: 'Update', payload: { id, title, content, image: uri, date } });
+        setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
         }
     };
 
     const deletePlant = (id, callback) => {
-        dispatch({ type: 'Delete', payload: { id: id } });
-        dispatch({ type: 'SaveData' });
+        setPlants({ type: 'Delete', payload: { id: id } });
+        setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
         }
     };
 
-
-    const DateUpdate = (date,callback) =>{
-        dispatch({ type: 'Update', payload: { date } });
-        dispatch({ type: 'SaveData' });
+    const DateUpdate = (date, callback) => {
+        setPlants({ type: 'Update', payload: { date } });
+        setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
         }
@@ -104,11 +104,11 @@ export const PlantProvider = ({ children }) => {
     return (
         <PlantContext.Provider
             value={{
-                state: state,
+                state: plants,
                 create: addPlant,
                 Updating: updatePlant,
                 remove: deletePlant,
-                water : DateUpdate
+                water: DateUpdate,
             }}
         >
             {children}
