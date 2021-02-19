@@ -14,13 +14,14 @@ import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
 
 const AddPlantPage = ({ navigation }) => {
-    const { create } = useContext(PlantContext);
+	const { create } = useContext(PlantContext);
+	const dateS = new Date()
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState(
         'https://image.shutterstock.com/image-vector/no-image-available-icon-vector-260nw-1323742826.jpg'
     );
-    const [water, setWater] = useState('');
+    const [date, setDate] = useState(dateS);
 
     return (
 		<Page>
@@ -62,26 +63,22 @@ const AddPlantPage = ({ navigation }) => {
 						returnKeyType={'done'}
 						onChangeText={(val) => setImage(val)}
 					/>
-					<Text style={styles.text}>Plant watered out of 5</Text>
+					<Text style={styles.text}>Date Added</Text>
 					<TextInput
 						style={styles.input}
-						keyboardType='number-pad'
-						returnKeyType={'done'}
-						onChangeText={(val) => setWater(val.toString())}
-						maxLength={1}
+						value = {dateS.toDateString()}
+						editable={false}
+						selectTextOnFocus={false}
 					/>
 					<View style={styles.buttonPos}>
 						<Button
 							title='Sumbit'
 							style={styles.Btn}
 							onPress={() => {
-								if (water == '' && water < 5) {
-									alert('Water Count cannot be greater than 5 or empty');
-								} else {
-									create(title, content, image, water, () => {
+									create(title, content, image,() => {
 										navigation.navigate(NavigationScreens.Plants.name);
 									});
-								}
+								
 							}}
 						/>
 					</View>
