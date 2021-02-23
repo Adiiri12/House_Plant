@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { useAuth } from '../../auth/AuthProvider';
+import { useAuth } from '../../firebase/AuthProvider';
 import AuthNavigationStackComponent from './AuthNavigationStack';
 import HomeNavigationStackComponent from './HomeNavigationStack';
 import PlantsNavigationStackComponent from './PlantsNavigationStack';

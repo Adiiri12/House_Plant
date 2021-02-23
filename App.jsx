@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { PlantProvider } from './contexts/PlantContext';
 import Navigation from './components/Navigation/Navigation';
-import { AuthProvider } from './auth/AuthProvider';
+import { AuthProvider } from './firebase/AuthProvider';
 import { DefaultTheme } from '@react-navigation/native';
+import StorageProvider from './firebase/StorageProvider';
 
 const theme = {
     ...DefaultTheme,
@@ -18,13 +17,11 @@ const theme = {
 const App = () => {
     return (
         <AuthProvider>
-            <PlantProvider>
+            <StorageProvider>
                 <Navigation theme={theme} />
-            </PlantProvider>
+            </StorageProvider>
         </AuthProvider>
     );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;

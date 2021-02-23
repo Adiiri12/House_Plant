@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useAuth } from '../../auth/AuthProvider';
+import { useAuth } from '../../firebase/AuthProvider';
 import Page from '../Page';
 import { Button } from 'react-native-elements';
 import { useTheme } from 'react-navigation';

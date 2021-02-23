@@ -54,7 +54,7 @@ const PlantReducer = (state, action) => {
 
 const Myplants = [];
 
-export const PlantProvider = ({ children }) => {
+export const PlantProviderObsolete = ({ children }) => {
     const [plants, setPlants] = useReducer(PlantReducer, Myplants);
     useEffect(() => {
         const loadStorage = async () => {
@@ -70,8 +70,8 @@ export const PlantProvider = ({ children }) => {
         loadStorage();
     }, [STORAGE_KEY]); // Persistant Storage until we move it to external storage
 
-    const addPlant = (title, content, uri,date, callback) => {
-        setPlants({ type: 'Add', payload: { title, content, image: uri,date } });
+    const addPlant = (title, content, uri, date, callback) => {
+        setPlants({ type: 'Add', payload: { title, content, image: uri, date } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
@@ -94,8 +94,8 @@ export const PlantProvider = ({ children }) => {
         }
     };
 
-    const DateUpdate = (id,date, callback) => {
-        setPlants({ type: 'Update', payload: { id,date } });
+    const DateUpdate = (id, date, callback) => {
+        setPlants({ type: 'Update', payload: { id, date } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();

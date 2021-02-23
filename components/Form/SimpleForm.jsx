@@ -1,10 +1,10 @@
 import { capitalize } from 'lodash';
 import React, { useState } from 'react';
-import { View, Text, Alert, StyleSheet } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { View, Alert, StyleSheet } from 'react-native';
+import { Button, Divider, Text } from 'react-native-elements';
 import { useTheme } from 'react-navigation';
 
-function SimpleForm({ keys, initialData, onSubmit, submitLabel }) {
+function SimpleForm({ title, keys, initialData, onSubmit, submitLabel, context }) {
     const theme = useTheme();
     const styles = useStyles(theme);
 
@@ -36,25 +36,25 @@ function SimpleForm({ keys, initialData, onSubmit, submitLabel }) {
     };
 
     return (
-        <View>
-            {keys.map(
-                ({ key, hidden, textContentType, autoCompleteType, keyboardType, password }) => (
-                    <View key={key} style={hidden ? styles.hidden : {}}>
-                        <Text style={styles.inputLabel}>{capitalize(key)}</Text>
-                        <Input
-                            textContentType={textContentType}
-                            autoCompleteType={autoCompleteType}
-                            keyboardType={keyboardType}
-                            secureTextEntry={password}
-                            onChangeText={(text) => handleSetData(key, text)}
-                            defaultValue={data[key] || ''}
-                            placeholder={capitalize(key)}
-                        />
-                    </View>
-                )
+        <View style={{ padding: 10 }}>
+            {title && (
+                <Text h3 style={styles.title}>
+                    {title}
+                </Text>
             )}
+            {keys.map(({ component: Component, name: key, context: c, hidden, ...rest }) => (
+                <View key={key} style={hidden ? styles.hidden : styles.input}>
+                    <Component
+                        {...rest}
+                        onChange={(value) => handleSetData(key, value)}
+                        defaultValue={data[key]}
+                        placeholder={capitalize(key)}
+                        data={context[c]}
+                    />
+                </View>
+            ))}
             <Button
-                style={{ marginTop: 20 }}
+                style={{ marginTop: 15 }}
                 onPress={handleSubmit}
                 title={submitLabel || 'Submit'}
                 loading={loading}
@@ -66,10 +66,7 @@ function SimpleForm({ keys, initialData, onSubmit, submitLabel }) {
 const useStyles = (theme) =>
     StyleSheet.create({
         input: {
-            padding: 2,
             borderRadius: 5,
-            paddingVertical: 2,
-            paddingHorizontal: 10,
             marginBottom: 5,
         },
         inputLabel: {
@@ -79,6 +76,10 @@ const useStyles = (theme) =>
         },
         hidden: {
             display: 'none',
+        },
+        title: {
+            marginBottom: 20,
+            color: '#62BD69',
         },
     });
 

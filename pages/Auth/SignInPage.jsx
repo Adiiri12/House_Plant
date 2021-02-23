@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useTheme } from 'react-navigation';
-import { useAuth } from '../../auth/AuthProvider';
+import { useAuth } from '../../firebase/AuthProvider';
 import { NavigationScreens } from '../../common/navigation';
 import SignInForm from '../../components/Form/Forms/SignInForm';
 import Page from '../Page';

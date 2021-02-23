@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from 'react-navigation';
-import { useAuth } from '../../auth/AuthProvider';
+import { useAuth } from '../../firebase/AuthProvider';
 import SignUpForm from '../../components/Form//Forms/SignUpForm';
 import Page from '../Page';
 

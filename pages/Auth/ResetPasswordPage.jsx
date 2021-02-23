@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
-import { useAuth } from '../../auth/AuthProvider';
+import { useAuth } from '../../firebase/AuthProvider';
 import ResetPasswordForm from '../../components/Form/Forms/ResetPasswordForm';
 import Page from '../Page';
 

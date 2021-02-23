@@ -1,6 +1,9 @@
+import FormEmailInput from '../components/Form/Forms/Components/FormEmailInput';
+import FormPasswordInput from '../components/Form/Forms/Components/FormPasswordInput';
+
 const SignUpFormKeys = [
-    { key: 'email', type: 'text', textContentType: 'emailAddress' },
-    { key: 'password', type: 'password', textContentType: 'password', password: true },
+    { component: FormEmailInput, name: 'email', label: 'Email' },
+    { component: FormPasswordInput, name: 'password', label: 'Password' },
 ];
 
 export default SignUpFormKeys;
