@@ -14,10 +14,10 @@ const PlantReducer = (state, action) => {
                 ...state,
                 {
                     id: Math.floor(Math.random() * 999999),
-                    title: action.payload.title,
-                    content: action.payload.content,
-                    image: action.payload.image,
-                    date: action.payload.date,
+                    name: action.payload.name,
+                    description: action.payload.description,
+                    imageURL : action.payload.imageURL ,
+                    lastWatered : action.payload.lastWatered ,
                 },
             ];
         case 'Update':
@@ -43,10 +43,10 @@ const PlantReducer = (state, action) => {
                 ...state,
                 {
                     id: action.payload.id,
-                    title: action.payload.title,
-                    content: action.payload.content,
-                    image: action.payload.image,
-                    date: new Date(action.payload.date),
+                    name: action.payload.name,
+                    description: action.payload.description,
+                    imageURL : action.payload.imageURL ,
+                    lastWatered: new Date(action.payload.lastWatered),
                 },
             ];
         default:
@@ -72,16 +72,16 @@ export const PlantProvider = ({ children }) => {
         loadStorage();
     }, [STORAGE_KEY]); // Persistant Storage until we move it to external storage
 
-    const addPlant = (title, content, uri, date, callback) => {
-        setPlants({ type: 'Add', payload: { title, content, image: uri, date } });
+    const addPlant = (name, description, uri, lastWatered, callback) => {
+        setPlants({ type: 'Add', payload: { name, description, imageURL: uri, lastWatered } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();
         }
     };
 
-    const updatePlant = (id, title, content, uri, date, callback) => {
-        setPlants({ type: 'Update', payload: { id, title, content, image: uri, date } });
+    const updatePlant = (id, name, description, uri, lastWatered, callback) => {
+        setPlants({ type: 'Update', payload: { id, name, description, imageURL: uri, lastWatered } });
         setPlants({ type: 'SaveData' });
         if (callback) {
             callback();

@@ -65,8 +65,10 @@ const MyPlantsPage = ({ navigation }) => {
             /> */}
             <FlatList
                 data={state}
+                numColumns={2}
                 keyExtractor={(element) => element.id.toString()}
-                renderItem={({ item }) => <PlantCard plant={item} />}
+                renderItem={({ item }) => <PlantCard plant={item} navigation={navigation} />
+             }
             />
         </View>
     );

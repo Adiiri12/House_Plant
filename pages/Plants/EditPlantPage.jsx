@@ -1,85 +1,43 @@
 import React, { useState, useContext } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Keyboard,
-    TouchableWithoutFeedback,
-} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Keyboard } from 'react-native';
 import PlantContext from '../../contexts/PlantContext';
 import { Button } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
+import { useHouseholdStorage, useStorage } from '../../firebase/HouseholdProvider';
+import { usePlantStorage } from '../../firebase/PlantProvider';
+import SimpleForm from '../../components/Form/SimpleForm';
+import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
 
 const EditPlantPage = ({ navigation, route }) => {
     const { id } = route.params;
     const dateS = new Date();
     const { state, Updating } = useContext(PlantContext);
     const currentId = state.find((e) => e.id === id);
-    const [title, setTitle] = useState(currentId.title);
-    const [content, setContent] = useState(currentId.content);
-    const [image, setImage] = useState(currentId.image);
-    const [date, setDate] = useState(dateS);
 
     return (
         <Page>
-            <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+            <KeyboardAwareScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.text}>Add</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={title}
-                        placeholder='Title'
-                        returnKeyType={'done'}
-                        onChangeText={(val) => setTitle(val)}
-                    />
-                    <Text style={styles.text}>Content</Text>
-                    <TextInput
-                        style={styles.inputMulti}
-                        value={content}
-                        placeholder='Content'
-                        onChangeText={(val) => setContent(val)}
-                        multiline={true}
-                        maxLength={140}
-                        //numberOfLines = {2}
-                        keyboardType='default'
-                        returnKeyType={'done'}
-                        blurOnSubmit={true}
-                        onSubmitEditing={() => {
-                            Keyboard.dismiss();
-                        }}
-                        ellipsizeMode={'tail'}
-                    />
-                    <Button
-                        title='Add Picture'
-                        style={styles.Btn}
-                        onPress={() => {
-                            navigation.navigate(NavigationScreens.Camera.name);
+                    <SimpleForm
+                        keys={AddPlantFormKeys}
+                        // context={{ households }}p
+                        onSubmit={({
+                            name: name,
+                            description: description,
+                            imageURL: imageURL,
+                            lastWatered: lastWatered,
+                        }) => Updating(currentId.id,name, description, imageURL, lastWatered,()=>{
+                            navigation.navigate(NavigationScreens.Plants.name);  
+                        })}
+                        initialData={{ 
+                            name: currentId.name,
+                            description: currentId.description,
+                            imageURL: currentId.imageURL,
+                            lastWatered: currentId.lastWatered
                         }}
                     />
-                    <TextInput
-                        style={styles.input}
-                        value={image}
-                        placeholder='image url'
-                        returnKeyType={'done'}
-                        onChangeText={(val) => setImage(val)}
-                    />
-                    <Text style={styles.text}>Date Watered</Text>
-                    <TextInput style={styles.input} value={dateS.toDateString()} />
-                    <View style={styles.buttonPos}>
-                        <Button
-                            title='Sumbit'
-                            style={styles.Btn}
-                            onPress={() => {
-                                console.log('update');
-                                Updating(currentId.id, title, content, image, date, () => {
-                                    navigation.navigate(NavigationScreens.Plants.name);
-                                });
-                            }}
-                        />
-                    </View>
                 </View>
             </KeyboardAwareScrollView>
         </Page>
@@ -88,11 +46,8 @@ const EditPlantPage = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     container: {
-        //flex :1,
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        //lexDirection : 'column',
+        padding: 20,
         borderRadius: 5,
     },
     itemContainer: {

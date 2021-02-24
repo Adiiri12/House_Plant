@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PlantContext from '../../contexts/PlantContext'
 import {
     Text,
     View,
@@ -10,13 +11,21 @@ import {
 import { Card, Title, Paragraph } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-elements';
+import { NavigationScreens } from '../../common/navigation';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const PlantCard = ({ plant }) => {
-    var half = plant.description.substring(0, 80);
 
+
+const PlantCard = ({ plant,navigation }) => {
+
+    const { state, remove } = useContext(PlantContext);
+    const { Updating } = useContext(PlantContext);
+    const half = plant.description ? plant.description.substring(0, 100) : '';
+    const dateS = new Date();
+   
     return (
         <View style={styles.card}>
             <Card style={styles.card}>
@@ -42,7 +51,7 @@ const PlantCard = ({ plant }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate('editplant', {
+                            navigation.navigate(NavigationScreens.EditPlant.name, {
                                 id: plant.id,
                             });
                         }}
@@ -54,16 +63,16 @@ const PlantCard = ({ plant }) => {
                         />
                     </TouchableOpacity>
                     <Button
-                        title='Plant Watered ?'
+                        title='Plant Watered?'
                         titleStyle={{
                             fontSize: 10,
                         }}
                         style={styles.buttonPos}
                         onPress={() => {
-                            if (plant.lastWatered?.toDateString() == dateS.toDateString()) {
+                            if (plant.lastWatered.toDateString() == dateS.toDateString()) {
                                 alert('Plant Already Watered');
                             } else {
-                                Updating(plant.id, plant.title, plant.content, plant.image, dateS);
+                                Updating(plant.id, plant.name, plant.description, plant.imageURL, dateS);
                             }
                         }}
                     />
