@@ -13,7 +13,7 @@ function SimpleForm({ title, keys, initialData, onSubmit, submitLabel, context }
         ...keys.reduce(
             (acc, cur) => ({
                 ...acc,
-                [cur.key]: initialData ? initialData[cur.key] : '',
+                [cur.name]: initialData ? initialData[cur.name] : '',
             }),
             {}
         ),
@@ -49,7 +49,7 @@ function SimpleForm({ title, keys, initialData, onSubmit, submitLabel, context }
                         onChange={(value) => handleSetData(key, value)}
                         defaultValue={data[key]}
                         placeholder={capitalize(key)}
-                        data={context[c]}
+                        data={c ? context[c] : null}
                     />
                 </View>
             ))}

@@ -1,8 +1,9 @@
 import React from 'react';
-import { HouseholdProvider } from './HouseholdProvider';
-import { PlantProvider } from './PlantProvider';
+import { FirebaseHouseholdProvider } from './HouseholdProvider';
+import { FirebasePlantProvider } from './PlantProvider';
+import { View } from 'react-native';
 
-const StorageProvider = ({ children }) => {
+const FirebaseStorageProvider = ({ children }) => {
     return (
         <HouseholdProvider>
             <PlantProvider>{children}</PlantProvider>
@@ -10,4 +11,4 @@ const StorageProvider = ({ children }) => {
     );
 };
 
-export default StorageProvider;
+export default FirebaseStorageProvider;

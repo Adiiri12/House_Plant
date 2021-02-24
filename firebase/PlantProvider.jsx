@@ -11,7 +11,7 @@ import _ from 'lodash';
 
 const PlantStorageContext = React.createContext();
 
-export const PlantProvider = ({ children }) => {
+export const FirebasePlantProvider = ({ children }) => {
     const images = storage.refFromURL('gs://myhouseplants-development.appspot.com/Images');
 
     const [plants, setPlants] = useState([]);

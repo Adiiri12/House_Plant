@@ -4,7 +4,7 @@ import { firestore } from './firebase';
 
 const HouseholdStorageContext = React.createContext();
 
-export const HouseholdProvider = ({ children }) => {
+export const FirebaseHouseholdProvider = ({ children }) => {
     const { currentUser } = useAuth();
 
     const [households, setHouseholds] = useState([]);

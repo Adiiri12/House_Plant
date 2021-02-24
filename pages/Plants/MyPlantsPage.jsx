@@ -6,17 +6,17 @@ import PlantContext from '../../contexts/PlantContext';
 import { NavigationScreens } from '../../common/navigation';
 import { useHouseholdStorage } from '../../firebase/HouseholdProvider';
 import { usePlantStorage } from '../../firebase/PlantProvider';
-import Select from '../../components/Select/Select';
 import PlantCard from '../../components/Card/PlantCard';
 import _ from 'lodash';
 
 const MyPlantsPage = ({ navigation }) => {
-    const { households } = useHouseholdStorage();
-    const { plants } = usePlantStorage();
+    // const { households } = useHouseholdStorage();
+    // const { plants } = usePlantStorage();
+    const { state } = useContext(PlantContext);
 
-    const [currentHousehold, setCurrentHousehold] = useState(
-        households && !_.isEmpty(households) ? households[0] : null
-    );
+    // const [currentHousehold, setCurrentHousehold] = useState(
+    //     households && !_.isEmpty(households) ? households[0] : null
+    // );
 
     useEffect(() => {
         navigation.setOptions({
@@ -34,32 +34,37 @@ const MyPlantsPage = ({ navigation }) => {
         });
     }, []);
 
-    if (!households || _.isEmpty(households)) {
-        return (
-            <View>
-                <Text>No Households</Text>
-            </View>
-        );
-    }
+    // if (!households || _.isEmpty(households)) {
+    //     return (
+    //         <View>
+    //             <Text>No Households</Text>
+    //         </View>
+    //     );
+    // }
 
-    if (!plants || _.isEmpty(plants)) {
-        return (
-            <View>
-                <Text>No Plants</Text>
-            </View>
-        );
-    }
+    // if (!plants || _.isEmpty(plants)) {
+    //     return (
+    //         <View>
+    //             <Text>No Plants</Text>
+    //         </View>
+    //     );
+    // }
 
     return (
         <View style={styles.container}>
-            <Select
+            {/* <Select
                 buttonTitle={currentHousehold.name}
                 data={households}
                 titleRenderer={(item) => item.name}
                 onSelect={(item, i) => setCurrentHousehold(item)}
-            />
-            <FlatList
+            /> */}
+            {/* <FlatList
                 data={plants.filter((plant) => plant.householdID === currentHousehold.id)}
+                keyExtractor={(element) => element.id.toString()}
+                renderItem={({ item }) => <PlantCard plant={item} />}
+            /> */}
+            <FlatList
+                data={state}
                 keyExtractor={(element) => element.id.toString()}
                 renderItem={({ item }) => <PlantCard plant={item} />}
             />

@@ -5,6 +5,8 @@ const STORAGE_KEY = 'Plant_Storage_v2';
 
 const PlantContext = React.createContext();
 
+// TODO: change to correct plant structure
+
 const PlantReducer = (state, action) => {
     switch (action.type) {
         case 'Add':
@@ -54,7 +56,7 @@ const PlantReducer = (state, action) => {
 
 const Myplants = [];
 
-export const PlantProviderObsolete = ({ children }) => {
+export const PlantProvider = ({ children }) => {
     const [plants, setPlants] = useReducer(PlantReducer, Myplants);
     useEffect(() => {
         const loadStorage = async () => {

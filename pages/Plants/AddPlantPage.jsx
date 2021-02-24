@@ -6,19 +6,29 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
 import { useHouseholdStorage, useStorage } from '../../firebase/HouseholdProvider';
-import Select from '../../components/Select/Select';
 import { usePlantStorage } from '../../firebase/PlantProvider';
 import SimpleForm from '../../components/Form/SimpleForm';
 import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
 
 const AddPlantPage = ({ navigation }) => {
-    const { households } = useHouseholdStorage();
+    // const { households } = useHouseholdStorage();
+    const { create } = useContext(PlantContext);
 
     return (
         <Page>
             <KeyboardAwareScrollView>
                 <View style={styles.container}>
-                    <SimpleForm keys={AddPlantFormKeys} context={{ households }} />
+                    <SimpleForm
+                        keys={AddPlantFormKeys}
+                        // context={{ households }}p
+                        onSubmit={({
+                            name: title,
+                            description: content,
+                            imageURL: uri,
+                            lastWatered: date,
+                        }) => create(title, content, uri, date)}
+                        initialData={{ lastWatered: new Date().toUTCString() }}
+                    />
                 </View>
             </KeyboardAwareScrollView>
         </Page>
