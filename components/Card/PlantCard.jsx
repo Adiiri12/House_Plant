@@ -23,8 +23,9 @@ const PlantCard = ({ plant,navigation }) => {
 
     const { state, remove } = useContext(PlantContext);
     const { Updating } = useContext(PlantContext);
-    const half = plant.description ? plant.description.substring(0, 100) : '';
+    //const half = plant.description ? plant.description.substring(0, 100) : '';
     const dateS = new Date();
+    console.log(plant.lastWatered.toUTCString())
    
     return (
         <View style={styles.card}>
@@ -37,8 +38,7 @@ const PlantCard = ({ plant,navigation }) => {
                     />
                     <Title style={styles.text}>{plant.name}</Title>
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
-                        {half}
-                        <Text style={{ color: 'blue' }}> Read more</Text>
+                        {plant.description}
                     </Paragraph>
                 </Card.Content>
                 <View style={styles.icon}>
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
         //backgroundColor : 'white'
     },
     cardImage: {
-        height: windowHeight / 4,
-        //width :windowWidth/6,
+        aspectRatio: 1.1,
+        borderWidth: 3,
         backgroundColor: '#000',
     },
     text: {
@@ -118,14 +118,16 @@ const styles = StyleSheet.create({
         //position: 'absolute',
         ///bottom:0,
         //right : 0,
-        flex: 1,
-        flexDirection: 'row',
+        flex : 1,
+        flexDirection : 'row',
         //flexGrow : 1,
         //justifyContent: 'flex-end'
         justifyContent: 'space-evenly',
+        //backgroundColor : 'yellow',
     },
     buttonPos: {
         alignSelf: 'flex-end',
+        
     },
 });
 

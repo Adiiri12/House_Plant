@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationScreens } from '../../common/navigation';
 import AddPlantPage from '../../pages/Plants/AddPlantPage';
 import EditPlantPage from '../../pages/Plants/EditPlantPage';
-import CameraPage from '../../pages/Plants/CameraPage';
+import CameraPage from '../../pages/Plants/SearchPage';
 import MyPlantsPage from '../../pages/Plants/MyPlantsPage';
 
 const PlantsNavigationStack = createStackNavigator();
@@ -23,13 +23,6 @@ const PlantsNavigationStackComponent = () => {
                 component={AddPlantPage}
                 options={{
                     title: NavigationScreens.AddPlant.title,
-                }}
-            />
-            <PlantsNavigationStack.Screen
-                name={NavigationScreens.Camera.name}
-                component={CameraPage}
-                options={{
-                    title: NavigationScreens.Camera.title,
                 }}
             />
 			<PlantsNavigationStack.Screen

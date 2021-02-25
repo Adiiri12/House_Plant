@@ -27,7 +27,10 @@ const AddPlantPage = ({ navigation }) => {
                                 console.log('Saving: ', imageURL);
                             })
                         }
-                        initialData={{ lastWatered: new Date().toUTCString() }}
+                        initialData={{ 
+                            name : 'Image',
+                            description : 'No Description',
+                            lastWatered: new Date().toUTCString() }}
                     />
                 </View>
             </KeyboardAwareScrollView>

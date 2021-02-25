@@ -7,6 +7,7 @@ import AuthNavigationStackComponent from './AuthNavigationStack';
 import HomeNavigationStackComponent from './HomeNavigationStack';
 import PlantsNavigationStackComponent from './PlantsNavigationStack';
 import ProfileNavigationStackComponent from './ProfileNavigationStack';
+import SearchNavigationStackComponent from './SearchNavigation';
 import { NavigationTabs } from '../../common/navigation';
 import { useTheme } from 'react-navigation';
 
@@ -30,6 +31,8 @@ const Navigation = ({ theme }) => {
                                 iconName = 'leaf';
                             } else if (route.name === NavigationTabs.Profile.name) {
                                 iconName = 'person';
+                            } else if (route.name === NavigationTabs.Search.name) {
+                                iconName = 'search';
                             }
 
                             return (
@@ -52,6 +55,11 @@ const Navigation = ({ theme }) => {
                         name={NavigationTabs.Plants.name}
                         component={PlantsNavigationStackComponent}
                         options={{ title: NavigationTabs.Plants.title }}
+                    />
+                     <TabNavigator.Screen
+                        name={NavigationTabs.Search.name}
+                        component={SearchNavigationStackComponent}
+                        options={{ title: NavigationTabs.Search.title }}
                     />
                     <TabNavigator.Screen
                         name={NavigationTabs.Profile.name}

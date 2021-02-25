@@ -2,6 +2,7 @@ export const NavigationTabs = {
     Home: { name: 'homeTab', title: 'Home' },
     Plants: { name: 'plantsTab', title: 'My Plants' },
     Profile: { name: 'profileTab', title: 'Profile' },
+    Search: { name: 'searchTab', title: 'Search' },
 };
 
 export const NavigationScreens = {
@@ -11,7 +12,7 @@ export const NavigationScreens = {
     Home: { name: 'home', title: 'Home' },
     Plants: { name: 'plants', title: 'My Plants' },
     AddPlant: { name: 'addplant', title: 'Add Plant' },
-    Camera: { name: 'camera', title: 'Capture Plant' },
+    Search: { name: 'search', title: 'Search' },
     EditPlant: { name: 'editplant', title: 'Edit Plant' },
     Profile: { name: 'profile', title: 'My Profile' },
 };
