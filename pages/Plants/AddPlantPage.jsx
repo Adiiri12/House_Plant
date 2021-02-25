@@ -12,7 +12,7 @@ import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
 
 const AddPlantPage = ({ navigation }) => {
     // const { households } = useHouseholdStorage();
-    const {create } = useContext(PlantContext);
+    const { create } = useContext(PlantContext);
 
     return (
         <Page>
@@ -21,15 +21,12 @@ const AddPlantPage = ({ navigation }) => {
                     <SimpleForm
                         keys={AddPlantFormKeys}
                         // context={{ households }}p
-                        onSubmit={({
-                            name: name,
-                            description: description,
-                            imageURL: imageURL,
-                            lastWatered: lastWatered,
-                        }) => create(name, description, imageURL, lastWatered,()=>{
-                            navigation.navigate(NavigationScreens.Plants.name); 
-                            console.log(imageURL) 
-                        })}
+                        onSubmit={({ name, description, imageURL, lastWatered }) =>
+                            create(name, description, imageURL, lastWatered, () => {
+                                navigation.navigate(NavigationScreens.Plants.name);
+                                console.log('Saving: ', imageURL);
+                            })
+                        }
                         initialData={{ lastWatered: new Date().toUTCString() }}
                     />
                 </View>

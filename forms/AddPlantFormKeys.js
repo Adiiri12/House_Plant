@@ -14,7 +14,7 @@ const AddPlantFormKeys = [
     { component: FormTextInput, name: 'name', label: 'Name' },
     { component: FormTextInput, name: 'description', label: 'Description' },
     { component: FormDateInput, name: 'lastWatered', label: 'Last Watered' },
-    { component: FormImageInput, name: 'image', label: 'Capture Image' },
+    { component: FormImageInput, name: 'imageURL', label: 'Capture Image' },
 ];
 
 export default AddPlantFormKeys;
