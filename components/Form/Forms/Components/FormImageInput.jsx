@@ -6,9 +6,9 @@ import { Camera } from 'expo-camera';
 const FormImageInput = ({ label, onChange, defaultValue }) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
-    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewVisible, setPreviewVisible] = useState(!!defaultValue);
     const [retake, setRetake] = useState(false);
-    const [image, SetImage] = useState(null);
+    const [image, SetImage] = useState(defaultValue || null);
 
     useEffect(() => {
         (async () => {

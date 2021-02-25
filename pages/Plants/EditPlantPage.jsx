@@ -22,20 +22,22 @@ const EditPlantPage = ({ navigation, route }) => {
                 <View style={styles.container}>
                     <SimpleForm
                         keys={AddPlantFormKeys}
-                        // context={{ households }}p
+                        // context={{ households }}
                         onSubmit={({
                             name: name,
                             description: description,
                             imageURL: imageURL,
                             lastWatered: lastWatered,
-                        }) => Updating(currentId.id,name, description, imageURL, lastWatered,()=>{
-                            navigation.navigate(NavigationScreens.Plants.name);  
-                        })}
-                        initialData={{ 
+                        }) =>
+                            Updating(currentId.id, name, description, imageURL, lastWatered, () => {
+                                navigation.navigate(NavigationScreens.Plants.name);
+                            })
+                        }
+                        initialData={{
                             name: currentId.name,
                             description: currentId.description,
                             imageURL: currentId.imageURL,
-                            lastWatered: currentId.lastWatered
+                            lastWatered: currentId.lastWatered,
                         }}
                     />
                 </View>
