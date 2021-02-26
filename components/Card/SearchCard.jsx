@@ -19,7 +19,7 @@ const windowHeight = Dimensions.get('window').height;
 
 
 
-const SearchCard = ({search,navigation }) => {
+const SearchCard = ({plant,navigation }) => {
 
     //const { state, remove } = useContext(PlantContext);
     //onst { Updating } = useContext(PlantContext);
@@ -27,22 +27,58 @@ const SearchCard = ({search,navigation }) => {
     //const dateS = new Date();
     //console.log(plant.lastWatered.toUTCString())
    
+    console.log(plant.image_url)
+    console.log('Here')
+    
     return (
         <View style={styles.card}>
             <Card style={styles.card}>
                 <Card.Content>
                     <ImageBackground
-                        source={{ uri: search.image_url }}
+                        source={{ uri: plant.image_url }}
                         style={styles.cardImage}
                         resizeMode='contain'
                     />
-                    <Title style={styles.text}>{search.common_name}</Title>
+                    <Title style={styles.text}>{plant.common_name}</Title>
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
-                        <Text>Also called</Text>
-                        {search.scientific_name}
-                        <Text>Is a species of the {search.genus}</Text>
                     </Paragraph>
                 </Card.Content>
+                <View style={styles.icon}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            remove(plant.id);
+                        }}
+                    >
+                        <MaterialCommunityIcons name='delete' size={26} color='red' />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate(NavigationScreens.EditPlant.name, {
+                                id: plant.id,
+                            });
+                        }}
+                    >
+                        <MaterialCommunityIcons
+                            name='tooltip-edit-outline'
+                            size={26}
+                            color='blue'
+                        />
+                    </TouchableOpacity>
+                    <Button
+                        title='Plant Watered?'
+                        titleStyle={{
+                            fontSize: 10,
+                        }}
+                        style={styles.buttonPos}
+                        onPress={() => {
+                            if (plant.lastWatered.toDateString() == dateS.toDateString()) {
+                                alert('Plant Already Watered');
+                            } else {
+                                Updating(plant.id, plant.name, plant.description, plant.imageURL, dateS);
+                            }
+                        }}
+                    />
+                </View>
             </Card>
         </View>
     );
@@ -74,7 +110,7 @@ const styles = StyleSheet.create({
     cardImage: {
         aspectRatio: 1.1,
         borderWidth: 3,
-        backgroundColor: '#000',
+        //backgroundColor: '#000',
     },
     text: {
         fontWeight: 'bold',
@@ -96,5 +132,6 @@ const styles = StyleSheet.create({
         
     },
 });
+
 
 export default SearchCard;

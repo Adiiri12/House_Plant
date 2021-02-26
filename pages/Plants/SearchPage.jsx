@@ -15,13 +15,13 @@ import useSearchResults from '../../common/SeachResults'
 
 
 const Search = ({ navigation }) => {
-    const[search , setSearch] = useState('a');
+    const[search , setSearch] = useState('rose');
     const [getResult, result , errorMessage] = useSearchResults();
 
     useEffect(()=>{
         getResult(search);
     },[])
-    console.log(result);
+    //console.log(result);  //This works Shows you all the output of the search
 
 
 
@@ -38,16 +38,22 @@ const Search = ({ navigation }) => {
                 <Button
                  title='Search'
                  style = {{marginTop : 5}}
+                 onPress={() => {
+                    getResult(search);
+                }}
                 />
              </View>
+             <View
+             style = {{flex:1,backgroundColor:'yellow',marginTop:5}} //colour used to see where the flex container are
+             >
              <FlatList
+                style = {{flex:1,backgroundColor:'yellow'}}
                 data={result}
-                numColumns={2}
-                keyExtractor={(element) => element.id}
-                renderItem={({ item }) => console.log(item)}
-                // <SearchCard search={item} navigation={navigation}
-                // />
+                //numColumns={2}
+                keyExtractor={(element) => element.id.toString()}
+                renderItem={({ item }) =>  <SearchCard plant={item} navigation={navigation}/>}
                 />
+                </View>
             </View>
         </Page>
     );
@@ -62,10 +68,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     input:{
-        flex :1, 
+        padding: 10,
         flexDirection:'row', 
         justifyContent : 'flex-start' ,
-        //backgroundColor : 'yellow'
+        backgroundColor : 'yellow'
 
     },
     inputbox:{

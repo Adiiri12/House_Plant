@@ -11,11 +11,11 @@ export default () =>{
                 params:{
                     token  : 'lnK6fYLoCXL0tq7E0o3ByRi6JRHNH-CtZxuTlAz4mi4',
                     q : search,
-                    limit  :20,
+                    limit  :10,
 
                 },
              });
-           setResult(response.data);
+           setResult(response.data.data);
             }catch(e){
             console.log(e);
             setErrorMessage('Error Something went wrong try again')
