@@ -24,6 +24,7 @@ const Search = ({ navigation }) => {
     console.log(result);
 
 
+
     return (
         <Page>
             <View style = {styles.container}>
@@ -42,8 +43,10 @@ const Search = ({ navigation }) => {
              <FlatList
                 data={result}
                 numColumns={2}
-                keyExtractor={(element) => element.id.toString()}
-                renderItem={({ item }) => <SearchCard search={item} navigation={navigation}/>}
+                keyExtractor={(element) => element.id}
+                renderItem={({ item }) => console.log(item)}
+                // <SearchCard search={item} navigation={navigation}
+                // />
                 />
             </View>
         </Page>

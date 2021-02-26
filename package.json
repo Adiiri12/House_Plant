@@ -1,5 +1,8 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "proxy": {
+    "*":{ "target" : "https://trefle.io/api/v1/plants/y"}
+ },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

@@ -7,7 +7,7 @@ export default () =>{
     const getResult = async (search) =>{
         try{
             setErrorMessage('')
-            const response = await plants.get('/search?',{
+            const response = await plants.get('/search?', {
                 params:{
                     token  : 'lnK6fYLoCXL0tq7E0o3ByRi6JRHNH-CtZxuTlAz4mi4',
                     q : search,
