@@ -33,7 +33,13 @@ const SearchCard = ({plant,navigation }) => {
 
     //var str  = plant.image_url.replace('https','http')
     useEffect(()=>{
-        setStr(plant.image_url.replace('https','http'))
+        if(plant.image_url == null){
+            setStr(plant.image_url)
+        }
+        else if(plant.image_url != null){
+        setStr(
+            plant.image_url.replace('https','http'))
+        }
     },[])
 
     console.log(str)
