@@ -44,10 +44,10 @@ const Search = ({ navigation }) => {
                 />
              </View>
              <View
-             style = {{flex:1,backgroundColor:'yellow',marginTop:5}} //colour used to see where the flex container are
+             style = {{flex:1}} //colour used to see where the flex container are
              >
              <FlatList
-                style = {{flex:1,backgroundColor:'yellow'}}
+                style = {{flex:1,marginTop:5}}
                 data={result}
                 //numColumns={2}
                 keyExtractor={(element) => element.id.toString()}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection:'row', 
         justifyContent : 'flex-start' ,
-        backgroundColor : 'yellow'
+        //backgroundColor : 'yellow'
 
     },
     inputbox:{

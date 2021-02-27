@@ -12,7 +12,7 @@ export const NavigationScreens = {
     Home: { name: 'home', title: 'Home' },
     Plants: { name: 'plants', title: 'My Plants' },
     AddPlant: { name: 'addplant', title: 'Add Plant' },
-    Search: { name: 'search', title: 'Search' },
+    Search: { name: 'search', title: 'Discover a new Plant' },
     EditPlant: { name: 'editplant', title: 'Edit Plant' },
     Profile: { name: 'profile', title: 'My Profile' },
 };
