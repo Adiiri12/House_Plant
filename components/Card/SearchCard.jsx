@@ -57,6 +57,16 @@ const SearchCard = ({plant,navigation }) => {
                     <Title style={styles.text}>{plant.common_name}</Title>
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         {plant.scientific_name} and was found during {plant.bibliography}
+                        <TouchableOpacity  onPress = {() => navigation.navigate(NavigationScreens.Info.name,{
+                          title : plant.common_name,
+                          photo : str,
+                          content : plant.scientific_name,
+                          year : plant.year,
+                          bibliography : plant.bibliography
+                        }
+                        )}>
+                        <Text style = {{color: 'blue'}}> Read More</Text>
+                        </TouchableOpacity>
                     </Paragraph>
                 </Card.Content>
             </Card>

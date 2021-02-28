@@ -15,4 +15,5 @@ export const NavigationScreens = {
     Search: { name: 'search', title: 'Discover a new Plant' },
     EditPlant: { name: 'editplant', title: 'Edit Plant' },
     Profile: { name: 'profile', title: 'My Profile' },
+    Info : {name : 'Information' , title: 'More Information'},
 };

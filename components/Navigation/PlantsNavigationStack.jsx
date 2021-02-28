@@ -3,7 +3,6 @@ import React from 'react';
 import { NavigationScreens } from '../../common/navigation';
 import AddPlantPage from '../../pages/Plants/AddPlantPage';
 import EditPlantPage from '../../pages/Plants/EditPlantPage';
-import CameraPage from '../../pages/Plants/SearchPage';
 import MyPlantsPage from '../../pages/Plants/MyPlantsPage';
 
 const PlantsNavigationStack = createStackNavigator();
