@@ -29,7 +29,7 @@ const SearchCard = ({plant,navigation }) => {
    
     const[str , setStr] = useState('');
     //console.log(plant.image_url)
-    console.log('Here')
+    //console.log('Here')
 
     //var str  = plant.image_url.replace('https','http')
     useEffect(()=>{
@@ -42,7 +42,7 @@ const SearchCard = ({plant,navigation }) => {
         }
     },[])
 
-    console.log(str)
+    //console.log(str)
     
     return (
         <View style={styles.card}>
@@ -58,6 +58,7 @@ const SearchCard = ({plant,navigation }) => {
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         {plant.scientific_name} and was found during {plant.bibliography}
                         <TouchableOpacity  onPress = {() => navigation.navigate(NavigationScreens.Info.name,{
+                          id : plant.id,
                           title : plant.common_name,
                           photo : str,
                           content : plant.scientific_name,

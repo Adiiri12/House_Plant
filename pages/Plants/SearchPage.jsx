@@ -21,7 +21,7 @@ const Search = ({ navigation }) => {
     useEffect(()=>{
         getResult(search);
     },[])
-    console.log(result);  //This works Shows you all the output of the search
+    //console.log(result);  //This works Shows you all the output of the search
 
 
 

@@ -25,7 +25,7 @@ const PlantCard = ({ plant,navigation }) => {
     const { Updating } = useContext(PlantContext);
     //const half = plant.description ? plant.description.substring(0, 100) : '';
     const dateS = new Date();
-    console.log(plant.lastWatered.toUTCString())
+    console.log(new Date(plant.lastWatered).toDateString())
    
     return (
         <View style={styles.card}>
@@ -69,7 +69,7 @@ const PlantCard = ({ plant,navigation }) => {
                         }}
                         style={styles.buttonPos}
                         onPress={() => {
-                            if (plant.lastWatered.toDateString() == dateS.toDateString()) {
+                            if (new Date(plant.lastWatered).toDateString() == dateS.toDateString()) {
                                 alert('Plant Already Watered');
                             } else {
                                 Updating(plant.id, plant.name, plant.description, plant.imageURL, dateS);
