@@ -18,15 +18,18 @@ const MoreInfo = ({navigation,route}) => {
 
     const[num , Num] = useState(id);
     const [getResult, result , errorMessage] = IdResults();
+    const [images,setImages] = useState([])
     const count = 0;
 
     useEffect(()=>{
         getResult(id);
+        //console.log
+        
+        
     },[])
-    
-    //console.log(result)
+  
+  //console.log(result.data?.id) // this works 
 
-    // const images = result.data?.images?.flower[count].image_url
 
     // for (count; count < images.length; count++) {
     //   console.log(count)
@@ -58,12 +61,16 @@ const MoreInfo = ({navigation,route}) => {
             </Card.Content>
           </Card>
           <FlatList
-            data = {result}
+            data = {result.data} // and this doesn't
             //extraData={result.data}
             keyExtractor = {e => e.id}
-            renderItem = {({ item }) =>  {
-              console.log(item)
+            renderItem = {({ item  , index}) =>  {
+              console.log(item?.id)
               console.log('hello')  // there is an array of images availble to view however flatlist is not working
+              return(
+                <Text>Yo</Text>
+
+              )
             }}
           />
         </View>
