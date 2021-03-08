@@ -53,11 +53,11 @@ const MoreInfo = ({navigation,route}) => {
              was {year} and the bibliography is {bibliography}
             </Paragraph>
             <Title style = {styles.text}>Specifications</Title>
-            <Paragraph>Average Height : {result.data?.specifications?.average_height?.cm}</Paragraph>
-            <Paragraph>Maximum Height : {result.data?.specifications?.maximum_height?.cm}</Paragraph>
+            <Paragraph>Average Height : {result.data?.specifications?.average_height?.cm  ? result.data?.specifications?.average_height?.cm :'unknown' }</Paragraph>
+            <Paragraph>Maximum Height : {result.data?.specifications?.maximum_height?.cm ? result.data?.specifications?.maximum_height?.cm :'unknown' }</Paragraph>
             <Title style = {styles.text}>Growth</Title>
-            <Paragraph>Ph Maximum : {result.data?.growth.ph_maximum}</Paragraph>
-            <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum}</Paragraph>
+            <Paragraph>Ph Maximum : {result.data?.growth.ph_maximum ? result.data?.growth.ph_maximum:'unknown' }</Paragraph>
+            <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum ? result.data?.growth.ph_minimum:'unknown' }</Paragraph>
             </Card.Content>
           </Card>
           <FlatList

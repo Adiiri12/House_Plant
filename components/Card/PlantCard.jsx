@@ -19,6 +19,7 @@ const windowHeight = Dimensions.get('window').height;
 
 
 
+
 const PlantCard = ({ plant,navigation }) => {
 
     const { state, remove } = useContext(PlantContext);
@@ -26,6 +27,7 @@ const PlantCard = ({ plant,navigation }) => {
     //const half = plant.description ? plant.description.substring(0, 100) : '';
     const dateS = new Date();
     console.log(new Date(plant.lastWatered).toDateString())
+    console.log(plant.imageURL);
    
     return (
         <View style={styles.card}>
