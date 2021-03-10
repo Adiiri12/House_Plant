@@ -14,23 +14,9 @@ import { ActivityIndicator } from 'react-native';
 
 const ItemView = ({ item }) => {
     return (
-        // Flat List Item
         <Text style={styles.itemStyle} onPress={() => getItem(item)}>
             {item.title}
         </Text>
-    );
-};
-
-const ItemSeparatorView = () => {
-    return (
-        // Flat List Item Separator
-        <View
-            style={{
-                height: 0.5,
-                width: '100%',
-                backgroundColor: '#C8C8C8',
-            }}
-        />
     );
 };
 
@@ -62,7 +48,7 @@ const MyHouseholdsPage = ({ navigation }) => {
         try {
             setLoadingHouseholds(true);
 
-            const households = await getHouseholds(currentUser.uid);
+            const households = await getHouseholds(currentUser['email']);
             setHouseholds(households);
         } catch (err) {
             Alert.alert(err.message);

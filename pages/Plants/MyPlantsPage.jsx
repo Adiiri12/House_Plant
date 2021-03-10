@@ -10,6 +10,7 @@ import PlantCard from '../../components/Card/PlantCard';
 import _ from 'lodash';
 import { Alert } from 'react-native';
 import { RefreshControl } from 'react-native';
+import { Button } from 'react-native-elements';
 
 const MyPlantsPage = ({ navigation, route }) => {
     const { householdID } = route.params;
@@ -50,11 +51,23 @@ const MyPlantsPage = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            <Button
+                title='Manage Users'
+                type='outline'
+                onPress={() => navigation.navigate(NavigationScreens.Invite.name, { householdID })}
+                style={{ margin: 5, marginTop: 10, backgroundColor: '#fff' }}
+            />
             <FlatList
                 data={plants}
                 numColumns={2}
                 keyExtractor={(element) => element.id.toString()}
-                renderItem={({ item }) => <PlantCard plant={item} navigation={navigation} />}
+                renderItem={({ item }) => (
+                    <PlantCard
+                        plant={item}
+                        navigation={navigation}
+                        onRefresh={() => setLoadingPlants(true)}
+                    />
+                )}
                 refreshControl={
                     <RefreshControl refreshing={loadingPlants} onRefresh={loadPlants} />
                 }

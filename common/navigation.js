@@ -18,4 +18,5 @@ export const NavigationScreens = {
 	EditPlant: { name: 'editplant', title: 'Edit Plant' },
 	Profile: { name: 'profile', title: 'My Profile' },
 	Info: { name: 'Information', title: 'More Information' },
+	Invite: { name: 'invite', title: 'Invite User' }
 };
