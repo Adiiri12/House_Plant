@@ -61,7 +61,7 @@ const MoreInfo = ({navigation,route}) => {
             <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum ? result.data?.growth.ph_minimum:'unknown' }</Paragraph>
             <Title style = {styles.text}>More Flower Images</Title>
             <FlatList
-            data = {result.data?.images?.flower} // and this doesn't
+            data = {result.data?.images?.flower.slice(0,6)} // and this doesn't
             //extraData={result.data}
             keyExtractor = {e => e.id}
             numColumns = {3}
