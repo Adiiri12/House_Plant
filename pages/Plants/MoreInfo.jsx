@@ -28,7 +28,7 @@ const MoreInfo = ({navigation,route}) => {
         
     },[])
   
-  //console.log(result.data?.id) // this works 
+  console.log(result.data) // this works 
 
 
     // for (count; count < images.length; count++) {
@@ -40,6 +40,7 @@ const MoreInfo = ({navigation,route}) => {
     //console.log(Object.keys(result.data.images.flower).length);
     //console.log(photo)
     return (
+      <ScrollView>
         <View styles = {styles.container}>
           <Card style = {styles.card}>
             <ImageBackground
@@ -58,22 +59,29 @@ const MoreInfo = ({navigation,route}) => {
             <Title style = {styles.text}>Growth</Title>
             <Paragraph>Ph Maximum : {result.data?.growth.ph_maximum ? result.data?.growth.ph_maximum:'unknown' }</Paragraph>
             <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum ? result.data?.growth.ph_minimum:'unknown' }</Paragraph>
-            </Card.Content>
-          </Card>
-          <FlatList
-            data = {result.data} // and this doesn't
+            <Title style = {styles.text}>More Flower Images</Title>
+            <FlatList
+            data = {result.data?.images?.flower} // and this doesn't
             //extraData={result.data}
             keyExtractor = {e => e.id}
+            numColumns = {3}
             renderItem = {({ item  , index}) =>  {
-              console.log(item?.id)
-              console.log('hello')  // there is an array of images availble to view however flatlist is not working
+              console.log(item.image_url)
+              //console.log('hello')  // there is an array of images availble to view however flatlist is not working
               return(
-                <Text>Yo</Text>
+                <ImageBackground
+             source ={{uri :item.image_url}}
+             style = {styles.cardImages}
+             resizeMode = 'cover'
+            />
 
               )
             }}
           />
+            </Card.Content>
+          </Card>
         </View>
+        </ScrollView>
     );
 }
 
@@ -96,10 +104,19 @@ const styles = StyleSheet.create({
             borderRadius : 5,
             borderColor : '#000',
             width : windowWidth,
-            height : windowHeight/1.5,
+            height : windowHeight,
             padding :1,
             margin : 3,
        },
+       cards : {
+        //borderWidth : 1,
+        borderRadius : 5,
+        borderColor : '#000',
+        width : windowWidth/1.2,
+        height : windowHeight/1.5,
+        padding :1,
+        margin : 3,
+   },
        cardImage :{
           height : windowHeight/3.3,
           width : windowWidth/1.02,
@@ -107,12 +124,16 @@ const styles = StyleSheet.create({
        },
        cardImages :{
          //flex :1,
-         flexDirection : 'row',
+         //flexDirection : 'row',
          //flex : 1,
-         aspectRatio :3,
-         borderWidth: 3,
-         borderColor : 'grey',
-        //backgroundColor : '#000'
+        // aspectRatio :1,
+         marginRight : 8,
+         marginBottom : 3,
+          width : 120,
+          aspectRatio : 1,
+          borderWidth:1,
+          borderColor : 'grey',
+        //backgroundColor : 'grey'
      },
        text : {
          fontWeight : 'bold',
