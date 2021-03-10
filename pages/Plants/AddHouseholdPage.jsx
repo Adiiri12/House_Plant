@@ -1,35 +1,29 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, Text, View, TextInput, Keyboard, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Keyboard } from 'react-native';
 import PlantContext from '../../contexts/PlantContext';
 import { Button } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
-import { useHouseholdStorage, useStorage } from '../../firebase/HouseholdProvider';
-import { addPlant, usePlantStorage } from '../../firebase/PlantProvider';
+import { addHousehold, useHouseholdStorage, useStorage } from '../../firebase/HouseholdProvider';
+import { usePlantStorage } from '../../firebase/PlantProvider';
 import SimpleForm from '../../components/Form/SimpleForm';
-import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
+import AddHouseholdFormKeys from '../../forms/AddHouseholdFormKeys';
+import { useAuth } from '../../firebase/AuthProvider';
 
-const AddPlantPage = ({ navigation, route }) => {
-    const { householdID } = route.params;
-
-    const handleSubmit = async (plant) => {
-        try {
-            await addPlant(plant);
-            navigation.navigate(NavigationScreens.Plants.name);
-        } catch (err) {
-            Alert.alert(err.message);
-        }
-    };
+const AddHouseholdPage = ({ navigation }) => {
+    const { currentUser } = useAuth();
 
     return (
         <Page>
             <KeyboardAwareScrollView>
                 <View style={styles.container}>
                     <SimpleForm
-                        keys={AddPlantFormKeys}
-                        onSubmit={handleSubmit}
-                        initialData={{ householdID }}
+                        keys={AddHouseholdFormKeys}
+                        onSubmit={async (household) => {
+                            await addHousehold({ ...household, users: [currentUser.uid] });
+                            navigation.goBack();
+                        }}
                     />
                 </View>
             </KeyboardAwareScrollView>
@@ -79,4 +73,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddPlantPage;
+export default AddHouseholdPage;

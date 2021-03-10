@@ -31,16 +31,13 @@ const FormImageInput = ({ label, onChange, defaultValue }) => {
 
     let camera;
     const getPicture = async () => {
-        const photo = await camera.takePictureAsync();
+        const photo = await camera.takePictureAsync({ quality: 0 });
         setPreviewVisible(true);
-        //console.log('before');
         SetImage(photo.uri);
         onChange(photo.uri);
     };
 
     if (previewVisible === true) {
-        //console.log('what');
-        //console.log('what ' + image);
         return (
             <Fragment>
                 <View style={styles.cameraContainer}>

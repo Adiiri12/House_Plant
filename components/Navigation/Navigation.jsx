@@ -56,7 +56,7 @@ const Navigation = ({ theme }) => {
                         component={PlantsNavigationStackComponent}
                         options={{ title: NavigationTabs.Plants.title }}
                     />
-                     <TabNavigator.Screen
+                    <TabNavigator.Screen
                         name={NavigationTabs.Search.name}
                         component={SearchNavigationStackComponent}
                         options={{ title: NavigationTabs.Search.title }}

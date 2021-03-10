@@ -1,28 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlantContext from '../../contexts/PlantContext';
 import { NavigationScreens } from '../../common/navigation';
 import { useHouseholdStorage } from '../../firebase/HouseholdProvider';
-import { usePlantStorage } from '../../firebase/PlantProvider';
+import { getPlants, usePlantStorage } from '../../firebase/PlantProvider';
 import PlantCard from '../../components/Card/PlantCard';
 import _ from 'lodash';
+import { Alert } from 'react-native';
+import { RefreshControl } from 'react-native';
 
-const MyPlantsPage = ({ navigation }) => {
-    // const { households } = useHouseholdStorage();
-    // const { plants } = usePlantStorage();
-    const { state } = useContext(PlantContext);
-
-    // const [currentHousehold, setCurrentHousehold] = useState(
-    //     households && !_.isEmpty(households) ? households[0] : null
-    // );
+const MyPlantsPage = ({ navigation, route }) => {
+    const { householdID } = route.params;
+    const [plants, setPlants] = useState([]);
+    const [loadingPlants, setLoadingPlants] = useState(false);
 
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(NavigationScreens.AddPlant.name)}
+                    onPress={() =>
+                        navigation.navigate(NavigationScreens.AddPlant.name, { householdID })
+                    }
                 >
                     <MaterialCommunityIcons
                         name='arrow-up-bold-box-outline'
@@ -32,43 +32,32 @@ const MyPlantsPage = ({ navigation }) => {
                 </TouchableOpacity>
             ),
         });
+
+        loadPlants();
     }, []);
 
-    // if (!households || _.isEmpty(households)) {
-    //     return (
-    //         <View>
-    //             <Text>No Households</Text>
-    //         </View>
-    //     );
-    // }
-
-    // if (!plants || _.isEmpty(plants)) {
-    //     return (
-    //         <View>
-    //             <Text>No Plants</Text>
-    //         </View>
-    //     );
-    // }
+    const loadPlants = async () => {
+        try {
+            setLoadingPlants(true);
+            const plants = householdID ? await getPlants(householdID) : [];
+            setPlants(plants);
+        } catch (err) {
+            Alert.alert(err.message);
+        } finally {
+            setLoadingPlants(false);
+        }
+    };
 
     return (
         <View style={styles.container}>
-            {/* <Select
-                buttonTitle={currentHousehold.name}
-                data={households}
-                titleRenderer={(item) => item.name}
-                onSelect={(item, i) => setCurrentHousehold(item)}
-            /> */}
-            {/* <FlatList
-                data={plants.filter((plant) => plant.householdID === currentHousehold.id)}
-                keyExtractor={(element) => element.id.toString()}
-                renderItem={({ item }) => <PlantCard plant={item} />}
-            /> */}
             <FlatList
-                data={state}
+                data={plants}
                 numColumns={2}
                 keyExtractor={(element) => element.id.toString()}
-                renderItem={({ item }) => <PlantCard plant={item} navigation={navigation} />
-             }
+                renderItem={({ item }) => <PlantCard plant={item} navigation={navigation} />}
+                refreshControl={
+                    <RefreshControl refreshing={loadingPlants} onRefresh={loadPlants} />
+                }
             />
         </View>
     );

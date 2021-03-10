@@ -2,9 +2,6 @@ import React from 'react';
 import Navigation from './components/Navigation/Navigation';
 import { AuthProvider } from './firebase/AuthProvider';
 import { DefaultTheme } from '@react-navigation/native';
-import FirebaseStorageProvider from './firebase/StorageProvider';
-import { FirebasePlantProvider } from './firebase/PlantProvider';
-import { PlantProvider } from './contexts/PlantContext';
 
 const theme = {
     ...DefaultTheme,
@@ -19,11 +16,7 @@ const theme = {
 const App = () => {
     return (
         <AuthProvider>
-            {/* <FirebaseStorageProvider> */}
-            <PlantProvider>
-                <Navigation theme={theme} />
-            </PlantProvider>
-            {/* </FirebaseStorageProvider> */}
+            <Navigation theme={theme} />
         </AuthProvider>
     );
 };

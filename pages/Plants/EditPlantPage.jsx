@@ -1,20 +1,43 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Keyboard } from 'react-native';
 import PlantContext from '../../contexts/PlantContext';
 import { Button } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Page from '../Page';
 import { NavigationScreens } from '../../common/navigation';
-import { useHouseholdStorage, useStorage } from '../../firebase/HouseholdProvider';
-import { usePlantStorage } from '../../firebase/PlantProvider';
+import { getHouseholds } from '../../firebase/HouseholdProvider';
+import { getPlantByID, updatePlant } from '../../firebase/PlantProvider';
 import SimpleForm from '../../components/Form/SimpleForm';
 import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
 
 const EditPlantPage = ({ navigation, route }) => {
-    const { id } = route.params;
-    const dateS = new Date();
-    const { state, Updating } = useContext(PlantContext);
-    const currentId = state.find((e) => e.id === id);
+    const { plantID } = route.params;
+
+    const [plant, setPlant] = useState({});
+    const [households, setHouseholds] = useState([]);
+
+    useEffect(() => {
+        loadHouseholds();
+        loadPlant();
+    }, []);
+
+    const loadHouseholds = async () => {
+        try {
+            const households = await getHouseholds();
+            setHouseholds(households);
+        } catch (err) {
+            Alert.alert(err.message);
+        }
+    };
+
+    const loadPlant = async () => {
+        try {
+            const plant = await getPlantByID(plantID);
+            setPlant(plant);
+        } catch (err) {
+            Alert.alert(err.message);
+        }
+    };
 
     return (
         <Page>
@@ -22,22 +45,14 @@ const EditPlantPage = ({ navigation, route }) => {
                 <View style={styles.container}>
                     <SimpleForm
                         keys={AddPlantFormKeys}
-                        // context={{ households }}
-                        onSubmit={({
-                            name: name,
-                            description: description,
-                            imageURL: imageURL,
-                            lastWatered: lastWatered,
-                        }) =>
-                            Updating(currentId.id, name, description, imageURL, lastWatered, () => {
-                                navigation.navigate(NavigationScreens.Plants.name);
-                            })
-                        }
+                        context={{ households }}
+                        onSubmit={async (plant) => await updatePlant(plantID, plant)}
                         initialData={{
-                            name: currentId.name,
-                            description: currentId.description,
-                            imageURL: currentId.imageURL,
-                            lastWatered: currentId.lastWatered,
+                            hosueholdID: plant.householdID,
+                            name: plant.name,
+                            description: plant.description,
+                            imageURL: plant.imageURL,
+                            lastWatered: plant.lastWatered,
                         }}
                     />
                 </View>
