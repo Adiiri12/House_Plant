@@ -12,6 +12,7 @@ import AddPlantFormKeys from '../../forms/AddPlantFormKeys';
 
 const EditPlantPage = ({ navigation, route }) => {
     const { plantID } = route.params;
+    const { currentUser } = route.params;
 
     const [plant, setPlant] = useState({});
     const [households, setHouseholds] = useState([]);
@@ -23,7 +24,7 @@ const EditPlantPage = ({ navigation, route }) => {
 
     const loadHouseholds = async () => {
         try {
-            const households = await getHouseholds();
+            const households = await getHouseholds(currentUser['email']);
             setHouseholds(households);
         } catch (err) {
             Alert.alert(err.message);

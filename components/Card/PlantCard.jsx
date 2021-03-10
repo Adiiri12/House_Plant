@@ -3,7 +3,7 @@ import PlantContext from '../../contexts/PlantContext';
 import { View, ImageBackground, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, Divider } from 'react-native-elements';
 import { NavigationScreens } from '../../common/navigation';
 import { Alert } from 'react-native';
 import { deletePlant, updatePlant } from '../../firebase/PlantProvider';
@@ -20,7 +20,7 @@ function isSameDay(d1, d2) {
     );
 }
 
-const PlantCard = ({ plant, navigation }) => {
+const PlantCard = ({ plant, navigation, onRefresh }) => {
     const handleUpdateWatered = async () => {
         const today = new Date().toDateString();
         if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
@@ -47,6 +47,8 @@ const PlantCard = ({ plant, navigation }) => {
                 lastWatered: today,
             });
         }
+
+        onRefresh();
     };
 
     const handleDelete = async () => {
@@ -78,6 +80,11 @@ const PlantCard = ({ plant, navigation }) => {
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         {plant.description}
                     </Paragraph>
+                    <Divider />
+                    <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
+                        <Text style={{ fontWeight: 'bold' }}>Last watered</Text>:{' '}
+                        {plant.lastWatered}
+                    </Paragraph>
                 </Card.Content>
                 <View style={styles.icon}>
                     <Button
@@ -85,7 +92,7 @@ const PlantCard = ({ plant, navigation }) => {
                         icon={
                             <Ionicons
                                 name='water'
-                                size='26'
+                                size={26}
                                 color='#abcdef'
                                 style={{ marginRight: 10 }}
                             />
@@ -99,7 +106,7 @@ const PlantCard = ({ plant, navigation }) => {
                         icon={
                             <Ionicons
                                 name='pencil'
-                                size='26'
+                                size={26}
                                 color='#cdcdcd'
                                 style={{ marginRight: 10 }}
                             />
@@ -117,7 +124,7 @@ const PlantCard = ({ plant, navigation }) => {
                         icon={
                             <Ionicons
                                 name='trash'
-                                size='26'
+                                size={26}
                                 color='#efabcd'
                                 style={{ marginRight: 10 }}
                             />
@@ -156,14 +163,10 @@ const styles = StyleSheet.create({
     },
     cardButtonText: {},
     imageCard: {
-        aspectRatio: 1.03,
-        backgroundColor: '#eee',
-        borderRadius: 5,
+        aspectRatio: 1.1,
         padding: 5,
     },
     cardImage: {
-        aspectRatio: 1.03,
-        backgroundColor: '#eee',
         borderRadius: 5,
     },
     text: {

@@ -21,7 +21,7 @@ const AddHouseholdPage = ({ navigation }) => {
                     <SimpleForm
                         keys={AddHouseholdFormKeys}
                         onSubmit={async (household) => {
-                            await addHousehold({ ...household, users: [currentUser.uid] });
+                            await addHousehold({ ...household, users: [currentUser['email']] });
                             navigation.goBack();
                         }}
                     />

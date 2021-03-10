@@ -6,6 +6,7 @@ import EditPlantPage from '../../pages/Plants/EditPlantPage';
 import MyPlantsPage from '../../pages/Plants/MyPlantsPage';
 import MyHouseholdsPage from '../../pages/Plants/MyHouseholdsPage';
 import AddHouseholdPage from '../../pages/Plants/AddHouseholdPage';
+import InvitePage from '../../pages/Plants/InvitePage';
 
 const PlantsNavigationStack = createStackNavigator();
 
@@ -45,6 +46,13 @@ const PlantsNavigationStackComponent = () => {
                 component={EditPlantPage}
                 options={{
                     title: NavigationScreens.EditPlant.title,
+                }}
+            />
+            <PlantsNavigationStack.Screen
+                name={NavigationScreens.Invite.name}
+                component={InvitePage}
+                options={{
+                    title: NavigationScreens.Invite.title,
                 }}
             />
         </PlantsNavigationStack.Navigator>
