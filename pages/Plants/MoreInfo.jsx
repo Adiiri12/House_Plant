@@ -4,6 +4,7 @@ import {Button, Card, Title, Paragraph } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import IdResults from '../../common/IdResults'
 import { FlatList } from 'react-native-gesture-handler';
+import { LogBox  } from 'react-native';
 
 
 
@@ -23,7 +24,7 @@ const MoreInfo = ({navigation,route}) => {
 
     useEffect(()=>{
         getResult(id);
-        //console.log
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
         
         
     },[])
