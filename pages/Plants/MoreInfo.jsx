@@ -18,15 +18,18 @@ const MoreInfo = ({navigation,route}) => {
 
     const[num , Num] = useState(id);
     const [getResult, result , errorMessage] = IdResults();
+    const [images,setImages] = useState([])
     const count = 0;
 
     useEffect(()=>{
         getResult(id);
+        //console.log
+        
+        
     },[])
-    
-    //console.log(result)
+  
+  //console.log(result.data?.id) // this works 
 
-    // const images = result.data?.images?.flower[count].image_url
 
     // for (count; count < images.length; count++) {
     //   console.log(count)
@@ -50,20 +53,24 @@ const MoreInfo = ({navigation,route}) => {
              was {year} and the bibliography is {bibliography}
             </Paragraph>
             <Title style = {styles.text}>Specifications</Title>
-            <Paragraph>Average Height : {result.data?.specifications?.average_height?.cm}</Paragraph>
-            <Paragraph>Maximum Height : {result.data?.specifications?.maximum_height?.cm}</Paragraph>
+            <Paragraph>Average Height : {result.data?.specifications?.average_height?.cm  ? result.data?.specifications?.average_height?.cm :'unknown' }</Paragraph>
+            <Paragraph>Maximum Height : {result.data?.specifications?.maximum_height?.cm ? result.data?.specifications?.maximum_height?.cm :'unknown' }</Paragraph>
             <Title style = {styles.text}>Growth</Title>
-            <Paragraph>Ph Maximum : {result.data?.growth.ph_maximum}</Paragraph>
-            <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum}</Paragraph>
+            <Paragraph>Ph Maximum : {result.data?.growth.ph_maximum ? result.data?.growth.ph_maximum:'unknown' }</Paragraph>
+            <Paragraph>Ph Minimum : {result.data?.growth.ph_minimum ? result.data?.growth.ph_minimum:'unknown' }</Paragraph>
             </Card.Content>
           </Card>
           <FlatList
-            data = {result}
+            data = {result.data} // and this doesn't
             //extraData={result.data}
             keyExtractor = {e => e.id}
-            renderItem = {({ item }) =>  {
-              console.log(item)
+            renderItem = {({ item  , index}) =>  {
+              console.log(item?.id)
               console.log('hello')  // there is an array of images availble to view however flatlist is not working
+              return(
+                <Text>Yo</Text>
+
+              )
             }}
           />
         </View>
