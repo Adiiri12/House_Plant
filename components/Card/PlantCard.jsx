@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
 function isSameDay(d1, d2) {
     return (
         d1.getFullYear() === d2.getFullYear() &&
@@ -21,9 +22,11 @@ function isSameDay(d1, d2) {
 }
 
 const PlantCard = ({ plant, navigation }) => {
+    const [water , setWater] = useState(false)
     const handleUpdateWatered = async () => {
         const today = new Date().toDateString();
         if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
+            setWater(true)
             Alert.alert(
                 'Already Watered',
                 'This plant has already been watered today. Still continue?',
@@ -78,13 +81,16 @@ const PlantCard = ({ plant, navigation }) => {
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         {plant.description}
                     </Paragraph>
+                    <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
+                        lastWatered : {plant.lastWatered}
+                    </Paragraph>
                 </Card.Content>
                 <View style={styles.icon}>
                     <Button
                         title='Water'
                         icon={
                             <Ionicons
-                                name='water'
+                                name={water ? 'water-outline' : 'water'}
                                 size='26'
                                 color='#abcdef'
                                 style={{ marginRight: 10 }}
