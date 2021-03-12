@@ -22,20 +22,19 @@ function isSameDay(d1, d2) {
 }
 
 const PlantCard = ({ plant, navigation, onRefresh }) => {
-    const [water , setWater] = useState(false)
     const today = new Date().toDateString();
-    useEffect(() => {
-        if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
-            setWater(true)
-        }
-        console.log(water)
-        console.log(plant.lastWatered)
-        console.log(today)
-        console.log(plant)
-    }, []);
+    // useEffect(() => {
+    //     if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
+    //         setWater(true)
+    //     }
+    //     console.log(water)
+    //     console.log(plant.lastWatered)
+    //     console.log(today)
+    //     console.log(plant)
+    // }, []);
+    
     const handleUpdateWatered = async () => {
         if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
-            setWater(true)
             Alert.alert(
                 'Already Watered',
                 'This plant has already been watered today. Still continue?',
@@ -60,7 +59,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
             });
         }
 
-        onRefresh();
+        //onRefresh();
     };
 
     const handleDelete = async () => {
@@ -87,6 +86,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                         style={styles.imageCard}
                         resizeMode='contain'
                         imageStyle={styles.cardImage}
+                        onLoadEnd={plant.imageURL}
                     />
                     <Title style={styles.text}>{plant.name}</Title>
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
@@ -95,7 +95,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                     <Divider />
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         <Text style={{ fontWeight: 'bold' }}>Last watered</Text>:{' '}
-                        {plant.lastWatered}
+                        {plant.lastWatered  ? plant.lastWatered : 'No data click button'}
                     </Paragraph>
                 </Card.Content>
                 <View style={styles.icon}>
@@ -103,7 +103,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                         title='Water'
                         icon={
                             <Ionicons
-                                name={water ? 'water-outline' : 'water'}
+                                name={ 'water'}
                                 size='26'
                                 color='#abcdef'
                                 style={{ marginRight: 10 }}
