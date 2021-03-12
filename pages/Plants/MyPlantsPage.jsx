@@ -65,7 +65,7 @@ const MyPlantsPage = ({ navigation, route }) => {
                     <PlantCard
                         plant={item}
                         navigation={navigation}
-                        onRefresh={() => setLoadingPlants(true)}
+                        //onRefresh={() => setLoadingPlants(true)}
                     />
                 )}
                 refreshControl={

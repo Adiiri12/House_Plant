@@ -18,7 +18,7 @@ const AddPlantPage = ({ navigation, route }) => {
             await addPlant(plant);
             navigation.navigate(NavigationScreens.Plants.name);
         } catch (err) {
-            Alert.alert(err.message);
+            vonsole.log(err.message);
         }
     };
 

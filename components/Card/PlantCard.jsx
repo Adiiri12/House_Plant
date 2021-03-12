@@ -75,6 +75,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                 },
             },
         ]);
+        //onRefresh();
     };
 
     return (
