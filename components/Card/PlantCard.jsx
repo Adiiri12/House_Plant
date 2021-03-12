@@ -23,8 +23,17 @@ function isSameDay(d1, d2) {
 
 const PlantCard = ({ plant, navigation, onRefresh }) => {
     const [water , setWater] = useState(false)
+    const today = new Date().toDateString();
+    useEffect(() => {
+        if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
+            setWater(true)
+        }
+        console.log(water)
+        console.log(plant.lastWatered)
+        console.log(today)
+        console.log(plant)
+    }, []);
     const handleUpdateWatered = async () => {
-        const today = new Date().toDateString();
         if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
             setWater(true)
             Alert.alert(
