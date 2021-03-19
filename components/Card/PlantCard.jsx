@@ -12,7 +12,6 @@ import { Ionicons } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
 function isSameDay(d1, d2) {
     return (
         d1.getFullYear() === d2.getFullYear() &&
@@ -32,7 +31,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
     //     console.log(today)
     //     console.log(plant)
     // }, []);
-    
+
     const handleUpdateWatered = async () => {
         if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
             Alert.alert(
@@ -54,6 +53,24 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                 ]
             );
         } else {
+            Alert.alert(
+                'Have you watered this plant?',
+                'Make sure you have watered this plant before updating.',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: async () => {
+                            await updatePlant(plant.id, {
+                                lastWatered: today,
+                            });
+                        },
+                    },
+                ]
+            );
             await updatePlant(plant.id, {
                 lastWatered: today,
             });
@@ -96,7 +113,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                     <Divider />
                     <Paragraph style={{ fontSize: 13, padding: 5, marginLeft: -5 }}>
                         <Text style={{ fontWeight: 'bold' }}>Last watered</Text>:{' '}
-                        {plant.lastWatered  ? plant.lastWatered : 'No data click button'}
+                        {plant.lastWatered ? plant.lastWatered : 'No data click button'}
                     </Paragraph>
                 </Card.Content>
                 <View style={styles.icon}>
@@ -104,8 +121,8 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                         title='Water'
                         icon={
                             <Ionicons
-                                name={ 'water'}
-                                size='26'
+                                name={'water'}
+                                size={26}
                                 color='#abcdef'
                                 style={{ marginRight: 10 }}
                             />
