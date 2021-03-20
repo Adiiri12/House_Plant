@@ -24,7 +24,7 @@ const EditPlantPage = ({ navigation, route }) => {
 
     const loadHouseholds = async () => {
         try {
-            const households = await getHouseholds(currentUser['email']);
+            const households = await getHouseholds(currentUser['email'].toUpperCase());
             setHouseholds(households);
         } catch (err) {
             Alert.alert(err.message);

@@ -48,7 +48,7 @@ const MyHouseholdsPage = ({ navigation }) => {
         try {
             setLoadingHouseholds(true);
 
-            const households = await getHouseholds(currentUser['email']);
+            const households = await getHouseholds(currentUser['email'].toUpperCase());
             setHouseholds(households);
         } catch (err) {
             Alert.alert(err.message);

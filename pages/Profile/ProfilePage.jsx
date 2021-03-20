@@ -26,7 +26,7 @@ const ProfilePage = ({ navigation }) => {
         <Page>
             <View style={styles.container}>
                 <Text style={styles.email}>Signed in as:</Text>
-                <Text>{currentUser?.email}</Text>
+                <Text>{currentUser['email']}</Text>
             </View>
             {/* <View style={styles.padded}>
                 <Button title='Sign Out' onPress={() => signOut && signOut()} type='outline' />

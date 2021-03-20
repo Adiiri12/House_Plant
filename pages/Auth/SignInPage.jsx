@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { useTheme } from 'react-navigation';
 import { useAuth } from '../../firebase/AuthProvider';
 import { NavigationScreens } from '../../common/navigation';
 import SignInForm from '../../components/Form/Forms/SignInForm';
 import Page from '../Page';
+import { Ionicons } from '@expo/vector-icons';
 
 const SignInPage = ({ navigation }) => {
     const theme = useTheme();
@@ -15,6 +16,10 @@ const SignInPage = ({ navigation }) => {
 
     return (
         <Page>
+            <View style={{ ...styles.container, display: 'flex', flexDirection: 'row' }}>
+                <Ionicons name='leaf' size={26} color='green' style={{ marginRight: 10 }} />
+                <Text h4>My Houseplants</Text>
+            </View>
             <View style={styles.container}>
                 <SignInForm
                     onSubmit={(formData) => signIn && signIn(formData.email, formData.password)}
@@ -44,6 +49,7 @@ const useStyles = (theme) =>
             padding: 20,
             backgroundColor: '#fff',
             borderRadius: 5,
+            marginBottom: 10,
         },
         button: {
             marginTop: 10,
