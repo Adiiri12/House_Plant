@@ -12,6 +12,7 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-elements';
 import { NavigationScreens } from '../../common/navigation';
+import { isEmpty } from 'lodash';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -42,7 +43,13 @@ const SearchCard = ({plant,navigation }) => {
         }
     },[])
 
-    //console.log(str)
+    //console.log(isEmpty(plant))
+
+    if(plant.length = 0){
+        return(
+            <View>nothing</View>
+        );
+    }
     
     return (
         <View style={styles.card}>

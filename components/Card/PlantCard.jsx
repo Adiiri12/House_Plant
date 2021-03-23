@@ -21,6 +21,9 @@ function isSameDay(d1, d2) {
 }
 
 const PlantCard = ({ plant, navigation, onRefresh }) => {
+    useEffect(() => {
+        
+    },[plant]);
     const today = new Date().toDateString();
     // useEffect(() => {
     //     if (isSameDay(new Date(plant.lastWatered), new Date(today))) {
@@ -76,7 +79,6 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
             });
         }
 
-        //onRefresh();
     };
 
     const handleDelete = async () => {
@@ -91,8 +93,7 @@ const PlantCard = ({ plant, navigation, onRefresh }) => {
                     await deletePlant(plant.id);
                 },
             },
-        ]);
-        //onRefresh();
+        ]);;
     };
 
     return (

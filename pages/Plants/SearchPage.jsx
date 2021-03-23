@@ -23,8 +23,45 @@ const Search = ({ navigation }) => {
     },[])
     //console.log(result);  //This works Shows you all the output of the search
 
+   console.log(result.length)
 
-
+    if(result.length === 0){
+        return(
+            <Page>
+            <View style = {styles.container}>
+              <View style={styles.input}>
+                 <TextInput
+                    style = {styles.inputbox}
+                    placeholder='Title'
+                    returnKeyType={'done'}
+                    onChangeText={(val) => setSearch(val ? val : 'rose')}
+                />
+                <Button
+                 title='Search'
+                 style = {{marginTop : 5}}
+                 onPress={() => {
+                    getResult(search);
+                }}
+                />
+             </View>
+             <View
+             style = {{flex:1}} //colour used to see where the flex container are
+             >
+             <Text
+             style = {
+                 {
+                     alignSelf : 'center',
+                     padding : 10,
+                 }
+             }
+             >
+                 Search Again</Text>
+             <Text>The item you searched for seems to be empty</Text>
+            </View>
+          </View>
+        </Page>
+        );
+    }
     return (
         <Page>
             <View style = {styles.container}>
@@ -33,7 +70,7 @@ const Search = ({ navigation }) => {
                     style = {styles.inputbox}
                     placeholder='Title'
                     returnKeyType={'done'}
-                    onChangeText={(val) => setSearch(val)}
+                    onChangeText={(val) => setSearch(val ? val : 'rose')}
                 />
                 <Button
                  title='Search'
